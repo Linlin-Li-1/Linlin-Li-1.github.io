@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Linlin Li&#39;s blog</title>
+    <title>Categories on Linlin Li&#39;s Data Science Project Portfolio</title>
     <link>https://Linlin-Li-1.github.io/categories/</link>
-    <description>Recent content in Categories on Linlin Li&#39;s blog</description>
+    <description>Recent content in Categories on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Aug 2020 01:33:47 -0400</lastBuildDate>
@@ -12,20 +12,20 @@
     
     
     <item>
-      <title>category</title>
-      <link>https://Linlin-Li-1.github.io/categories/category/</link>
+      <title>Github Pages</title>
+      <link>https://Linlin-Li-1.github.io/categories/github-pages/</link>
       <pubDate>Thu, 20 Aug 2020 01:33:47 -0400</pubDate>
       
-      <guid>https://Linlin-Li-1.github.io/categories/category/</guid>
+      <guid>https://Linlin-Li-1.github.io/categories/github-pages/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>subcategory</title>
-      <link>https://Linlin-Li-1.github.io/categories/subcategory/</link>
+      <title>website</title>
+      <link>https://Linlin-Li-1.github.io/categories/website/</link>
       <pubDate>Thu, 20 Aug 2020 01:33:47 -0400</pubDate>
       
-      <guid>https://Linlin-Li-1.github.io/categories/subcategory/</guid>
+      <guid>https://Linlin-Li-1.github.io/categories/website/</guid>
       <description></description>
     </item>
     

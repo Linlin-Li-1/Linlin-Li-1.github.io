@@ -15,11 +15,11 @@ Step 1: Install Git Git is a free and open source distributed version control sy
 <meta property="og:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
 Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First Blog">
-<meta name="twitter:title" content="First Blog">
-<meta property="og:url" content="https://Linlin-Li-1.github.io/2020/08/first-blog/">
-<meta property="twitter:url" content="https://Linlin-Li-1.github.io/2020/08/first-blog/">
-<meta property="og:site_name" content="Linlin Li&#39;s blog">
+<meta property="og:title" content="How to Build a personal website on Github Pages using Hugo">
+<meta name="twitter:title" content="How to Build a personal website on Github Pages using Hugo">
+<meta property="og:url" content="https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
+<meta property="twitter:url" content="https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
 <meta property="og:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
 Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
 <meta name="twitter:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
@@ -35,9 +35,9 @@ Step 1: Install Git Git is a free and open source distributed version control sy
   
   
     
-      <meta property="article:section" content="category">
+      <meta property="article:section" content="website">
     
-      <meta property="article:section" content="subcategory">
+      <meta property="article:section" content="Github Pages">
     
   
   
@@ -57,6 +57,9 @@ Step 1: Install Git Git is a free and open source distributed version control sy
 
 
 
+  <meta property="og:image" content="https://Linlin-Li-1.github.io/static/cover11.jpg">
+  <meta property="twitter:image" content="https://Linlin-Li-1.github.io/static/cover11.jpg">
+
 
 
 
@@ -65,14 +68,14 @@ Step 1: Install Git Git is a free and open source distributed version control sy
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
 
 
-    <title>First Blog</title>
+    <title>How to Build a personal website on Github Pages using Hugo</title>
 
     <link rel="icon" href="https://Linlin-Li-1.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://Linlin-Li-1.github.io/2020/08/first-blog/">
+    <link rel="canonical" href="https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -95,7 +98,7 @@ Step 1: Install Git Git is a free and open source distributed version control sy
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://Linlin-Li-1.github.io/">Linlin Li&#39;s blog</a>
+    <a class="header-title-link" href="https://Linlin-Li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
   </div>
   
     
@@ -232,7 +235,7 @@ Step 1: Install Git Git is a free and open source distributed version control sy
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      First Blog
+      How to Build a personal website on Github Pages using Hugo
     </h1>
   
   
@@ -249,9 +252,9 @@ Step 1: Install Git Git is a free and open source distributed version control sy
   
     <span>in</span>
     
-      <a class="category-link" href="https://Linlin-Li-1.github.io/categories/category">category</a>, 
+      <a class="category-link" href="https://Linlin-Li-1.github.io/categories/website">website</a>, 
     
-      <a class="category-link" href="https://Linlin-Li-1.github.io/categories/subcategory">subcategory</a>
+      <a class="category-link" href="https://Linlin-Li-1.github.io/categories/github-pages">Github Pages</a>
     
   
 
@@ -266,67 +269,65 @@ Step 1: Install Git Git is a free and open source distributed version control sy
 <p><a href="https://git-scm.com/">Git</a> is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
 <p>Git can be installed on macOS, Windows and Linux. In fact, Git comes installed by default on most macOS and Linux machines. You can read and follow the <a href="https://github.com/git-guides/install-git">Git installation instructions</a> to install Git.</p>
 <p>On my macOS, Git is already installed. You can easily check by opening the command prompt &ldquo;<a href="https://en.wikipedia.org/wiki/Terminal_(macOS)">Terminal</a>&rdquo; and run the following command to verify Git was installed.</p>
-<p><code>git version</code></p>
-<h3 id="step-2-install-hugo">Step 2: Install Hugo</h3>
+<pre><code>git version  ##check git version
+</code></pre><h3 id="step-2-install-hugo">Step 2: Install Hugo</h3>
 <p><a href="https://gohugo.io/">Hugo</a> is a fast static website generator written in <a href="https://golang.org/">Go</a>. Unlike systems that dynamically build a page with each visitor request, Hugo builds pages when you create or update your content. Hugo takes data files, configuration, templates for layouts, static files, and content written in Markdown and renders a static website.</p>
 <p>Hugo can be installed on macOS, Windows, and Linux with the <a href="https://gohugo.io/getting-started/installing/">Hugo installation instructions</a>. <strong>And you don’t need to install Go to enjoy Hugo.</strong></p>
 <p>On my macOS, I first installed <a href="https://brew.sh/">Homebrew</a> by running the following command in Terminal. (You can find other <a href="https://docs.brew.sh/Installation">installation options</a>.)</p>
-<p><code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;</code></p>
-<p>You can then verify Homebrew is installed by</p>
-<p><code>brew help</code></p>
-<p>After that, run the followng command to install Hugo.</p>
-<p><code>brew install hugo</code></p>
-<p>When finished, verify that hugo runs correctly by</p>
-<p><code>hugo version  ##check hugo version</code></p>
-<h3 id="step-3-create-a-hugo-site">Step 3: Create a Hugo Site</h3>
+<pre><code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;
+</code></pre><p>You can then verify Homebrew is installed by</p>
+<pre><code>brew help
+</code></pre><p>After that, run the followng command to install Hugo.</p>
+<pre><code>brew install hugo
+</code></pre><p>When finished, verify that hugo runs correctly by</p>
+<pre><code>hugo version  ##check hugo version
+</code></pre><h3 id="step-3-create-a-hugo-site">Step 3: Create a Hugo Site</h3>
 <p>Find a place to store the Hugo site folder. I put it in my desktop by</p>
-<p><code>cd desktop  ##change directory</code></p>
-<p>Then create a new Hugo site by</p>
-<p><code>hugo new site blog  ##blog is the filename</code></p>
-<h3 id="step-4-customize-your-hugo-site">Step 4: Customize Your Hugo Site</h3>
+<pre><code>cd desktop  ##change directory
+</code></pre><p>Then create a new Hugo site by</p>
+<pre><code>hugo new site blog  ##blog is the filename
+</code></pre><h3 id="step-4-customize-your-hugo-site">Step 4: Customize Your Hugo Site</h3>
 <p><a href="https://themes.gohugo.io/">Here</a> you can find numerous Hugo Themes. You can choose one and copy the download address. For example, I chose the <a href="https://themes.gohugo.io/hugo-tranquilpeak-theme/">Tranquilpeak</a>.</p>
 <ol>
 <li>Go to your Hugo site directory.</li>
 </ol>
-<p><code>cd blog</code></p>
-<ol start="2">
+<pre><code>cd blog  ##change directory
+</code></pre><ol start="2">
 <li>Download the Hugo theme.</li>
 </ol>
-<p><code>git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/tranquilpeak</code></p>
-<ol start="3">
+<pre><code>git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/tranquilpeak
+</code></pre><ol start="3">
 <li>Copy the configuration file that comes with the theme and replace the default configuration file with it.</li>
 </ol>
-<p><code>cp themes/tranquilpeak/exampleSite/config.toml .  </code></p>
-<p><strong>Note: please be careful to include . at the end of the command line.</strong></p>
+<pre><code>cp themes/tranquilpeak/exampleSite/config.toml .  
+</code></pre><p><strong>Note: please be careful to include . at the end of the command line.</strong></p>
 <ol start="4">
 <li>Edit the configuration file <code>config.toml</code></li>
 </ol>
 <p>You need to change <code>baseURL = &quot;your_github_name.github.io&quot;</code> and <code>theme = &quot;tranquilpeak&quot;</code>. Here, you should replace your_github_name with exactly your github name. You can use <a href="https://www.dummies.com/web-design-development/web-hosting/how-to-edit-files-with-vi/">vi</a> in Terminal or use <a href="https://code.visualstudio.com/">VS Code</a> to do this.</p>
 <p>Take vi for example.</p>
-<ul>
-<li><code>vim config.toml  ##open and edit file</code></li>
-<li>After editing the file, press <code>esc</code> and then input <code>:wq</code> to save the changes and exit vi.</li>
-</ul>
+<pre><code>vim config.toml  ##open and edit file
+</code></pre><p>After editing the file, press <code>esc</code> and then input <code>:wq</code> to save the changes and exit vi.</p>
 <h3 id="step-5-write-a-new-post">Step 5: Write a new post</h3>
 <ol>
 <li>Create a folder to store posts.</li>
 </ol>
-<p><code>mkdir content/post  ##create a folder</code></p>
-<ol start="2">
+<pre><code>mkdir content/post  ##create a folder
+</code></pre><ol start="2">
 <li>Create a new post.</li>
 </ol>
-<p><code>hugo new post/first.md  ##&quot;first.md&quot; is the file name of the new post. </code></p>
-<ol start="3">
+<pre><code>hugo new post/first.md  ##&quot;first.md&quot; is the file name of the new post. 
+</code></pre><ol start="3">
 <li>Edit the newly created post and add some content.</li>
 </ol>
 <h3 id="step-6-preview-your-site">Step 6: Preview your site</h3>
 <p>If you are ready, start the Hugo server.</p>
-<p><code>hugo server -D</code></p>
-<p>You can preview your site at <a href="http://localhost:1313/">http://localhost:1313/</a>.</p>
+<pre><code>hugo server -D
+</code></pre><p>You can preview your site at <a href="http://localhost:1313/">http://localhost:1313/</a>.</p>
 <h3 id="step-7-build-your-hugo-site">Step 7: Build your Hugo site</h3>
 <p>If you are satisfactory with the preview, build your site by</p>
-<p><code>hugo</code></p>
-<p>After execution, a &ldquo;public&rdquo; directory will be added. This directory is a static file. Just upload the files in this folder.</p>
+<pre><code>hugo
+</code></pre><p>After execution, a &ldquo;public&rdquo; directory will be added. This directory is a static file. Just upload the files in this folder.</p>
 <h3 id="step-8-connect-to-github">Step 8: Connect to Github</h3>
 <p>Set global user name and user email with Github.</p>
 <pre><code>git config --global user.name &quot;your_github_name&quot;
@@ -402,20 +403,14 @@ git push -u  origin master  ##push your changes
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://Linlin-Li-1.github.io/2020/08/first-blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://Linlin-Li-1.github.io/2020/08/first-blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
               <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://Linlin-Li-1.github.io/2020/08/first-blog/">
-              <i class="fa fa-google-plus"></i>
             </a>
           </li>
         
@@ -488,20 +483,14 @@ git push -u  origin master  ##push your changes
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://Linlin-Li-1.github.io/2020/08/first-blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://Linlin-Li-1.github.io/2020/08/first-blog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
               <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://Linlin-Li-1.github.io/2020/08/first-blog/">
-              <i class="fa fa-google-plus"></i>
             </a>
           </li>
         
@@ -530,20 +519,14 @@ git push -u  origin master  ##push your changes
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FLinlin-Li-1.github.io%2F2020%2F08%2Ffirst-blog%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FLinlin-Li-1.github.io%2F2020%2F08%2Fhow-to-build-a-personal-website-on-github-pages-using-hugo%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FLinlin-Li-1.github.io%2F2020%2F08%2Ffirst-blog%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FLinlin-Li-1.github.io%2F2020%2F08%2Fhow-to-build-a-personal-website-on-github-pages-using-hugo%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-        </a>
-      </li>
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2FLinlin-Li-1.github.io%2F2020%2F08%2Ffirst-blog%2F">
-          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
     
@@ -628,9 +611,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/Linlin-Li-1.github.io\/2020\/08\/first-blog\/';
+          this.page.url = 'https:\/\/Linlin-Li-1.github.io\/2020\/08\/how-to-build-a-personal-website-on-github-pages-using-hugo\/';
           
-            this.page.identifier = '\/2020\/08\/first-blog\/'
+            this.page.identifier = '\/2020\/08\/how-to-build-a-personal-website-on-github-pages-using-hugo\/'
           
         };
         (function() {
