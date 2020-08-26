@@ -6,7 +6,7 @@
     <description>Recent content in Blog on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Aug 2020 01:33:47 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2020 13:14:00 -0400</lastBuildDate>
     
 	<atom:link href="https://Linlin-Li-1.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,11 +14,21 @@
     <item>
       <title>How to Build a personal website on Github Pages using Hugo</title>
       <link>https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</link>
-      <pubDate>Thu, 20 Aug 2020 01:33:47 -0400</pubDate>
+      <pubDate>Tue, 25 Aug 2020 13:14:00 -0400</pubDate>
       
       <guid>https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</guid>
       <description>In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&amp;rsquo;t need to have knowledge other than writing Markdown. It&amp;rsquo;s simple, let&amp;rsquo;s go!
 Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</description>
+    </item>
+    
+    <item>
+      <title>Welcome!</title>
+      <link>https://Linlin-Li-1.github.io/2020/08/welcome/</link>
+      <pubDate>Thu, 20 Aug 2020 01:33:47 -0400</pubDate>
+      
+      <guid>https://Linlin-Li-1.github.io/2020/08/welcome/</guid>
+      <description>Nice to meet you, and welcome to Linlin Li&amp;rsquo;s website! I am Linlin Li, a student in the Master’s of Statistical Science program at Duke University.
+I have always been eager to create a personal website to write interesting things and record my own growth. Fortunately, one of my courses requires me to update on my website, and I took this opportunity to make this idea come true. In the beginning, I planned to focus on documenting data science projects for future reference and let the website record the track of my learning.</description>
     </item>
     
   </channel>
