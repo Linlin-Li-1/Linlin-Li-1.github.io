@@ -3,13 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://Linlin-Li-1.github.io/2020/08/3-problems-on-euler-project/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Linlin-Li-1.github.io/tags/algorithm/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://Linlin-Li-1.github.io/categories/blog/</loc>
-    <lastmod>2020-08-21T13:14:00-04:00</lastmod>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://Linlin-Li-1.github.io/categories/</loc>
-    <lastmod>2020-08-21T13:14:00-04:00</lastmod>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Linlin-Li-1.github.io/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Linlin-Li-1.github.io/post/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Linlin-Li-1.github.io/tags/project-euler/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://Linlin-Li-1.github.io/tags/</loc>
+    <lastmod>2020-08-28T12:23:55-04:00</lastmod>
   </url>
   
   <url>
@@ -24,21 +54,6 @@
   
   <url>
     <loc>https://Linlin-Li-1.github.io/tags/hugo/</loc>
-    <lastmod>2020-08-21T13:14:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Linlin-Li-1.github.io/</loc>
-    <lastmod>2020-08-21T13:14:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Linlin-Li-1.github.io/post/</loc>
-    <lastmod>2020-08-21T13:14:00-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://Linlin-Li-1.github.io/tags/</loc>
     <lastmod>2020-08-21T13:14:00-04:00</lastmod>
   </url>
   
