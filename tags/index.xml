@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Aug 2020 12:23:55 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 12:08:26 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Age Structure</title>
+      <link>https://linlin-li-1.github.io/tags/age-structure/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/age-structure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data visualization</title>
+      <link>https://linlin-li-1.github.io/tags/data-visualization/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Malaria Death</title>
+      <link>https://linlin-li-1.github.io/tags/malaria-death/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/malaria-death/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Malaria Incidence</title>
+      <link>https://linlin-li-1.github.io/tags/malaria-incidence/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/malaria-incidence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Time Series</title>
+      <link>https://linlin-li-1.github.io/tags/time-series/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/time-series/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>algorithm</title>

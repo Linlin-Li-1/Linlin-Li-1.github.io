@@ -6,10 +6,19 @@
     <description>Recent content on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Aug 2020 12:23:55 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 12:08:26 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How terrible is the occurrence of malaria?</title>
+      <link>https://linlin-li-1.github.io/2020/09/how-terrible-is-the-occurrence-of-malaria/</link>
+      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/09/how-terrible-is-the-occurrence-of-malaria/</guid>
+      <description>Malaria is a serious and sometimes fatal disease caused by a parasite that commonly infects a certain type of mosquito which feeds on humans. People who get malaria are typically very sick with high fevers, shaking chills, and flu-like illness. Because malaria causes so much illness and death, the disease is a great drain on many national economies. Since many countries with malaria are already among the poorer nations, the disease maintains a vicious cycle of disease and poverty.</description>
+    </item>
     
     <item>
       <title>3 problems on Euler Project</title>
@@ -21,7 +30,7 @@
     </item>
     
     <item>
-      <title>How to Build a personal website on Github Pages using Hugo</title>
+      <title>How to build a personal website on Github Pages using Hugo</title>
       <link>https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</link>
       <pubDate>Fri, 21 Aug 2020 13:14:00 -0400</pubDate>
       
