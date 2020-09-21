@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Linlin Li&#39;s Data Science Project Portfolio</title>
-    <link>https://Linlin-Li-1.github.io/post/</link>
+    <link>https://linlin-li-1.github.io/post/</link>
     <description>Recent content in Posts on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 28 Aug 2020 12:23:55 -0400</lastBuildDate>
     
-	<atom:link href="https://Linlin-Li-1.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://linlin-li-1.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>3 problems on Euler Project</title>
-      <link>https://Linlin-Li-1.github.io/2020/08/3-problems-on-euler-project/</link>
+      <link>https://linlin-li-1.github.io/2020/08/3-problems-on-euler-project/</link>
       <pubDate>Fri, 28 Aug 2020 12:23:55 -0400</pubDate>
       
-      <guid>https://Linlin-Li-1.github.io/2020/08/3-problems-on-euler-project/</guid>
+      <guid>https://linlin-li-1.github.io/2020/08/3-problems-on-euler-project/</guid>
       <description>In this article, I would share my solutions to 3 problems of Project Euler using Python. The problems on Project Euler are designed according to the &amp;quot;one-minute rule&amp;quot;, which shows that an efficient implementation will allow a solution to be obtained in less then one minute. This is a good website where you can practice designing efficient algorithms for many difficult problems. I will continue to resolve problems on this website and update this blog in the future.</description>
     </item>
     
     <item>
       <title>How to Build a personal website on Github Pages using Hugo</title>
-      <link>https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</link>
+      <link>https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</link>
       <pubDate>Fri, 21 Aug 2020 13:14:00 -0400</pubDate>
       
-      <guid>https://Linlin-Li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</guid>
+      <guid>https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/</guid>
       <description>In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&amp;rsquo;t need to have knowledge other than writing Markdown. It&amp;rsquo;s simple, let&amp;rsquo;s go!
 You can find my Github repository for this blog here.
 Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</description>
@@ -33,10 +33,10 @@ Step 1: Install Git Git is a free and open source distributed version control sy
     
     <item>
       <title>Welcome!</title>
-      <link>https://Linlin-Li-1.github.io/2020/08/welcome/</link>
+      <link>https://linlin-li-1.github.io/2020/08/welcome/</link>
       <pubDate>Thu, 20 Aug 2020 01:33:47 -0400</pubDate>
       
-      <guid>https://Linlin-Li-1.github.io/2020/08/welcome/</guid>
+      <guid>https://linlin-li-1.github.io/2020/08/welcome/</guid>
       <description>Nice to meet you, and welcome to Linlin Li&amp;rsquo;s website! I am Linlin Li, a student in the Master’s of Statistical Science program at Duke University.
 I have always been eager to create a personal website to write interesting things and record my own growth. Fortunately, one of my courses requires me to update on my website, and I took this opportunity to make this idea come true. In the beginning, I planned to focus on documenting data science projects for future reference and let the website record the track of my learning.</description>
     </item>
