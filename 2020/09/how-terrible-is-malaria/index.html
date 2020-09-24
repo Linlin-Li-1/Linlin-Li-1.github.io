@@ -272,11 +272,63 @@
 
 <h2 id="1-the-spread-of-malaria-worldwide-over-time">1. The spread of malaria worldwide over time.</h2>
 
-<p>I created an interactive graph to show the spread of malaria over time. Malaria occurs mostly in poor tropical and subtropical areas of the world. Please check my <a href="https://github.com/Linlin-Li-1/visualization-on-malaria-dataset/blob/master/malaria_deaths.html/">git repo</a> if you would like to view it in detail.</p>
+<p>I hope to have an overall understanding of the spread of malaria in the world, so I created an interactive graph to show the spread of deaths from malaria over time. To do this, I preprocessed the malaria death data and downloaded the map data from <a href="https://hub.arcgis.com/datasets/a21fdb46d23e4ef896f31475217cbb08_1">here</a>. Then I used <code>TimeSliderChoropleth</code> in the <code>Folium</code> package to make a choropleth with a timeslider, to show the spread of malaria over time.</p>
+<pre><code>import branca.colormap as cm
+import folium
+import geopandas as gpd
+from folium.plugins import TimeSliderChoropleth
 
+## load data
+death = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths.csv&#39;)
+death_age = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths_age.csv&#39;)
+inc = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_inc.csv&#39;)
+countries = gpd.read_file(&#39;Countries_WGS84.shp&#39;)
+countries = countries.rename(columns={&#39;CNTRY_NAME&#39;: &#39;Entity&#39;})
+
+## data preprocessing
+death.columns = [&#39;death_rate&#39; if x==&#39;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&#39; else x for x in death.columns]
+sorted_df = death.sort_values([&#39;Entity&#39;, 
+                     &#39;Year&#39;]).reset_index(drop=True)
+sorted_df[&#39;date&#39;] = sorted_df[&#39;Year&#39;].apply(lambda x: datetime.datetime(x+1, 1, 1))
+sorted_df[&#39;date&#39;] = pd.to_datetime(sorted_df[&#39;date&#39;], yearfirst=True).astype(int) / 10**9
+sorted_df[&#39;date&#39;] = sorted_df[&#39;date&#39;].astype(int)
+joined_df = sorted_df.merge(countries, on=&#39;Entity&#39;)
+joined_df = joined_df[[&#39;Entity&#39;, &#39;death_rate&#39;, &#39;date&#39;, &#39;geometry&#39;]]
+
+## create the map
+max_colour = max(joined_df[&#39;death_rate&#39;])
+min_colour = min(joined_df[&#39;death_rate&#39;])
+cmap = cm.linear.YlOrRd_09.scale(min_colour, max_colour)
+joined_df[&#39;colour&#39;] = joined_df[&#39;death_rate&#39;].map(cmap)
+country_list = joined_df[&#39;Entity&#39;].unique().tolist()
+country_idx = range(len(country_list))
+countries_df = joined_df[[&#39;geometry&#39;]]
+countries_gdf = gpd.GeoDataFrame(countries_df)
+countries_gdf = countries_gdf.drop_duplicates().reset_index()
+
+style_dict = {}
+for i in country_idx:
+    country = country_list[i]
+    result = joined_df[joined_df[&#39;Entity&#39;] == country]
+    inner_dict = {}
+    for _, r in result.iterrows():
+        inner_dict[r[&#39;date&#39;]] = {&#39;color&#39;: r[&#39;colour&#39;], &#39;opacity&#39;: 0.7}
+    style_dict[str(i)] = inner_dict
+
+slider_map = folium.Map(min_zoom=2, max_bounds=True, tiles=&#39;cartodbpositron&#39;)
+               
+_ = TimeSliderChoropleth(
+    data=countries_gdf.to_json(),
+    styledict=style_dict,
+
+).add_to(slider_map)
+
+_ = cmap.add_to(slider_map)
+cmap.caption = &#34;Malaria Deaths (per 100,000 people)- Sex: Both - Age: Age-standardized&#34;
+slider_map.save(outfile=&#39;malaria_deaths.html&#39;)</code></pre>
 <p><img src="https://i.postimg.cc/3NQn2wVZ/plot1.gif" alt="drawing" width="980" height="550" title="The spread of malaria over time"/></p>
 
-<p>From <strong><em>Figure 1</em></strong>, the global spread of malaria has been curbed over time. However, Africa is still the most affected region due to a combination of factors:</p>
+<p>From <strong><em>Figure 1</em></strong>, the global spread of malaria has been curbed over time. However, Malaria occurs mostly in poor tropical and subtropical areas of the world, and Africa is still the most affected region due to a combination of factors:</p>
 
 <ul>
 <li>A very efficient mosquito (Anopheles gambiae  complex) is responsible for high transmission.</li>
@@ -286,16 +338,110 @@
 
 <h2 id="2-the-relationship-between-malaria-incidence-and-mortality">2. The relationship between malaria incidence and mortality.</h2>
 
-<p>Let us discuss the incidence and mortality of malaria. What happens if you have malaria? How likely are you to have the worst result? Which countries do better at curbing the spread and controlling malaria? <strong><em>Figure 2</em></strong> shows the changes in the incidence and mortality of malaria in the 20 most-affected countries.</p>
+<p>How terrible is malaria? What will happens if you have malaria? How likely are you to have the worst result? Which countries do better at curbing the spread and controlling malaria? Let us discuss the relationship between the incidence and mortality of malaria. I linked malaria death dataset with the age dataset and create a scatter plot for the 20 most-affected countries among the fifteen years. Then I add a smooth line to each country. <strong><em>Figure 2</em></strong> shows the changes in the incidence and mortality of malaria in the 20 most-affected countries.</p>
+<pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import make_interp_spline
+import matplotlib.lines as mlines
 
+## load data
+death = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths.csv&#39;)
+death_age = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths_age.csv&#39;)
+inc = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_inc.csv&#39;)
+
+## tidy data
+joined_df = inc.merge(death, on=(&#39;Entity&#39;, &#39;Year&#39;), how=&#39;inner&#39;)
+joined_df = joined_df.rename(columns = {&#39;Incidence of malaria (per 1,000 population at risk) (per 1,000 population at risk)&#39;:&#39;Incidence&#39;, &#39;Deaths - Malaria - Sex: Both - Age: Age-standardized (Rate) (per 100,000 people)&#39;: &#39;Deaths&#39;})
+countries = joined_df.groupby(&#39;Entity&#39;).min().nlargest(20, &#39;Incidence&#39;).index
+
+## create plot
+fig = plt.figure(figsize = (15, 10))
+ax = fig.add_subplot(111)
+markers = [&#39;P&#39;, &#39;^&#39;, &#39;o&#39;, &#39;*&#39;]
+colors = dict(zip(countries, plt.cm.jet(np.linspace(0, 1, len(countries)))))
+
+for country, color in colors.items():
+    df = joined_df[joined_df[&#39;Entity&#39;] == country]
+    for i in range(4):
+        ax.scatter(df[&#39;Incidence&#39;].iloc[i], df[&#39;Deaths&#39;].iloc[i], color = color, marker = markers[i], s = 100)
+    x = np.array(df[&#39;Incidence&#39;])
+    y = np.array(df[&#39;Deaths&#39;])
+    y_smooth = make_interp_spline([2000, 2005, 2010, 2015], np.c_[x, y])(np.linspace(2000, 2015, 100))
+    ax.plot(*y_smooth.T, color = color, label = country)
+
+ax.set_xlabel(&#39;Incidence of Malaria (per 1,000 population at risk)&#39;, fontsize=20)
+ax.set_ylabel(&#39;Death of Malaria (per 100,000 people)&#39;, fontsize=20)
+ax.set_title(&#39;Incidence rate and death rate of Malaria for 20 most-affected countries&#39;, fontsize=20)
+leg1 = ax.legend(handles=[
+        mlines.Line2D([], [], color=&#39;black&#39;, marker=&#39;P&#39;, linestyle=&#39;None&#39;, label=&#39;2000&#39;, markersize = 10), 
+        mlines.Line2D([], [], color=&#39;black&#39;, marker=&#39;^&#39;, linestyle=&#39;None&#39;, label=&#39;2005&#39;, markersize = 10), 
+        mlines.Line2D([], [], color=&#39;black&#39;, marker=&#39;o&#39;, linestyle=&#39;None&#39;, label=&#39;2010&#39;, markersize = 10), 
+        mlines.Line2D([], [], color=&#39;black&#39;, marker=&#39;*&#39;, linestyle=&#39;None&#39;, label=&#39;2015&#39;, markersize = 10)],
+                prop={&#39;size&#39;: 15})
+leg2 = ax.legend(loc=&#39;upper left&#39;, bbox_to_anchor=(1.02, 1), borderaxespad=0, prop={&#39;size&#39;: 15})
+ax.add_artist(leg1)
+pass</code></pre>
 <p><img src="https://i.postimg.cc/432CmT3B/incidence-death.png" alt="drawing" width="980" height="450" title="Incidence and Deaths"/></p>
 
 <p>From <strong><em>Figure 2</em></strong>, we can see that morbidity and mortality in most countries have declined over time, but in some countries, such as Sierra Leone, Equatorial Guinea, Burkina Faso and Malawi,  malaria has worsened for several years and then eased. It is worth moting that morbidity and mortality rates in the Gambia have decreased rapidly over time, showing that Gambia has played an excellent role in controlling the spread of malaria and treating the disease.</p>
 
 <h2 id="3-the-age-structure-of-malaria-mortality">3. The age structure of malaria mortality.</h2>
 
-<p>Let us study the death of malaria in more depth. What is the age structure of malaria deaths? Which age group has the highest risk of malaria? <strong><em>Figure 3</em></strong> shows the age structure of malaria deaths in the 20 most-affected countries.
-<img src="https://i.postimg.cc/Fz5SMZqm/age.png" alt="drawing" width="980" height="450" title="Age Structure of Deaths"/></p>
+<p>Let us study the death of malaria in more depth. What is the age structure of malaria deaths? Which age group has the highest risk of malaria? Similarly, I create a scatter plot on the age structure of deaths from malaria for the 20 most-affected countries. <strong><em>Figure 3</em></strong> shows the age structure of malaria deaths in the 20 most-affected countries.</p>
+<pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import make_interp_spline
+
+## load data
+death = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths.csv&#39;)
+death_age = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_deaths_age.csv&#39;)
+inc = pd.read_csv(&#39;tidytuesday/data/2018/2018-11-13/malaria_inc.csv&#39;)
+
+# tidy death_age
+## remove duplicate index column
+death_age = death_age.drop(labels = &#39;Unnamed: 0&#39;, axis = 1)
+## rename entity to Entity
+death_age.columns = [&#39;Entity&#39; if x==&#39;entity&#39; else x for x in death_age.columns]
+## generate an indicator order to sort df
+death_age[&#39;age&#39;] = death_age[&#39;age_group&#39;].replace({&#39;Under 5&#39;: 0, &#39;5-14&#39;: 1, &#39;15-49&#39;: 2, &#39;50-69&#39;: 3, &#39;70 or older&#39;: 4})
+## remove entities that are not country
+countries = list(np.unique(death_age[&#39;Entity&#39;]))
+countries.remove(&#39;World&#39;)
+countries.remove(&#39;Sub-Saharan Africa&#39;)
+countries.remove(&#39;Western Sub-Saharan Africa&#39;)
+countries.remove(&#39;Low SDI&#39;)
+countries.remove(&#39;Low-middle SDI&#39;)
+countries.remove(&#39;Eastern Sub-Saharan Africa&#39;)
+countries.remove(&#39;Central Sub-Saharan Africa&#39;)
+
+## create the plot and label the 3 most-affected countries
+colors = plt.cm.jet(np.linspace(0, 1, len(countries)))
+plt.figure(figsize=(16,10))
+
+for i, country in enumerate(countries):
+    df = death_age[death_age[&#39;Entity&#39;] == country]
+    df = df[df[&#39;year&#39;] == 2016]
+    df = df.sort_values([&#39;age&#39;]).reset_index(drop=True)
+    x = df[&#39;age&#39;]
+    y = df[&#39;deaths&#39;]
+    x_new = np.linspace(x.min(), x.max(), 300)
+    y_smooth = make_interp_spline(x, y)(x_new)
+    plt.scatter(x, y, c=&#39;black&#39;,alpha = 0.5)
+    ## smooth line
+    plt.plot(x_new, y_smooth,c=colors[i], label=country)
+    plt.xticks(np.arange(min(x), max(x)+1, 1.0), [&#39;Under 5&#39;, &#39;5-14&#39;, &#39;15-49&#39;, &#39;50-69&#39;, &#39;70 or older&#39;])
+
+plt.text(0.15, 175000, &#39;Nigeria&#39;)
+plt.text(0.15, 50000, &#39;Democratic Republic of Congo&#39;)
+plt.text(0.15, 27000, &#39;Niger&#39;)
+plt.legend(loc=&#39;upper center&#39;, bbox_to_anchor=(0.5, -0.05), shadow=True, ncol=4)
+plt.xlabel(&#39;age group&#39;)
+plt.ylabel(&#39;deaths&#39;)
+plt.title(&#39;Malaria Death among Different Age Groups in 2016 (latest)&#39;)
+plt.show()</code></pre>
+<p><img src="https://i.postimg.cc/Fz5SMZqm/age.png" alt="drawing" width="980" height="450" title="Age Structure of Deaths"/></p>
 
 <p>Children under 5 years of age are one of the most vulnerable groups affected by malaria, especially in Nigeria, the Democratic Republic of the Congo and Niger. In high transmission areas, partial immunity to the disease is acquired during childhood. In such settings, the majority of malarial disease, and particularly severe disease with rapid progression to death, occurs in young children without acquired immunity. Severe anaemia, hypoglycemia and cerebral malaria are features of severe malaria more commonly seen in children than in adults.</p>
 
