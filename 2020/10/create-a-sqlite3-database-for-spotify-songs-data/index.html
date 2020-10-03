@@ -8,22 +8,22 @@
 <meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Linlin Li">
 <meta name="keywords" content="Python, Sqlite3">
-<meta name="description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
-Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta name="description" content="How to convert Python data frame to Sqlite3 database? It is quite easy in the Jupyter Notebook with sql extension. With this powerful extension, we can excecute SQL query in Jupyter Notebook, which is quite convenient.
+In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it.">
 
 
-<meta property="og:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
-Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta property="og:description" content="How to convert Python data frame to Sqlite3 database? It is quite easy in the Jupyter Notebook with sql extension. With this powerful extension, we can excecute SQL query in Jupyter Notebook, which is quite convenient.
+In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Create a Sqlite3 database for Spotify songs data">
 <meta name="twitter:title" content="Create a Sqlite3 database for Spotify songs data">
 <meta property="og:url" content="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/">
 <meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/">
 <meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
-<meta property="og:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
-Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
-<meta name="twitter:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
-Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta property="og:description" content="How to convert Python data frame to Sqlite3 database? It is quite easy in the Jupyter Notebook with sql extension. With this powerful extension, we can excecute SQL query in Jupyter Notebook, which is quite convenient.
+In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it.">
+<meta name="twitter:description" content="How to convert Python data frame to Sqlite3 database? It is quite easy in the Jupyter Notebook with sql extension. With this powerful extension, we can excecute SQL query in Jupyter Notebook, which is quite convenient.
+In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it.">
 <meta property="og:locale" content="en-us">
 
   
@@ -265,6 +265,8 @@ Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
               <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
+<p>How to convert Python data frame to Sqlite3 database? It is quite easy in the Jupyter Notebook with <code>sql</code> extension. With this powerful extension, we can excecute SQL query in Jupyter Notebook, which is quite convenient.</p>
 
 <p>In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/spotify_sql">here</a>. Data source: <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21">https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21</a>.</p>
 
