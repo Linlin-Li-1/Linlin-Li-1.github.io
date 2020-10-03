@@ -7,34 +7,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Linlin Li">
-<meta name="keywords" content="tech">
-<meta name="description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
-You can find my Github repository for this blog here.
-Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
+<meta name="keywords" content="Python, Javascript">
+<meta name="description" content="During my internship at Birch.ai, we want to test and improve the performance of our machine translation model. To achieve this, we first need to obtain a foreign language data set and its corresponding English data set, and hope that these data sets are translated by humans rather than machine translations.
+In this article, I would share my experience in scraping The New England Journal of Medicine from scratch using Python.">
 
 
-<meta property="og:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
-You can find my Github repository for this blog here.
-Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
+<meta property="og:description" content="During my internship at Birch.ai, we want to test and improve the performance of our machine translation model. To achieve this, we first need to obtain a foreign language data set and its corresponding English data set, and hope that these data sets are translated by humans rather than machine translations.
+In this article, I would share my experience in scraping The New England Journal of Medicine from scratch using Python.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to build a personal website on Github Pages using Hugo">
-<meta name="twitter:title" content="How to build a personal website on Github Pages using Hugo">
-<meta property="og:url" content="https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
-<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
+<meta property="og:title" content="Web Scraping for preparing training data for Machine Translation">
+<meta name="twitter:title" content="Web Scraping for preparing training data for Machine Translation">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/10/web-scraping-for-preparing-training-data-for-machine-translation/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/web-scraping-for-preparing-training-data-for-machine-translation/">
 <meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
-<meta property="og:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
-You can find my Github repository for this blog here.
-Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
-<meta name="twitter:description" content="In this article, I would share my experiences and the steps I took when building a personal website on GitHub Pages using Hugo. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!
-You can find my Github repository for this blog here.
-Step 1: Install Git Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.">
+<meta property="og:description" content="During my internship at Birch.ai, we want to test and improve the performance of our machine translation model. To achieve this, we first need to obtain a foreign language data set and its corresponding English data set, and hope that these data sets are translated by humans rather than machine translations.
+In this article, I would share my experience in scraping The New England Journal of Medicine from scratch using Python.">
+<meta name="twitter:description" content="During my internship at Birch.ai, we want to test and improve the performance of our machine translation model. To achieve this, we first need to obtain a foreign language data set and its corresponding English data set, and hope that these data sets are translated by humans rather than machine translations.
+In this article, I would share my experience in scraping The New England Journal of Medicine from scratch using Python.">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-08-21T13:14:00">
+    <meta property="article:published_time" content="2020-10-03T14:40:27">
   
   
-    <meta property="article:modified_time" content="2020-08-21T13:14:00">
+    <meta property="article:modified_time" content="2020-10-03T14:40:27">
   
   
   
@@ -44,9 +40,9 @@ Step 1: Install Git Git is a free and open source distributed version control sy
   
   
     
-      <meta property="article:tag" content="Hugo">
+      <meta property="article:tag" content="Data Scraping">
     
-      <meta property="article:tag" content="Github Pages">
+      <meta property="article:tag" content="Python">
     
   
 
@@ -59,8 +55,8 @@ Step 1: Install Git Git is a free and open source distributed version control sy
 
 
 
-  <meta property="og:image" content="https://i.postimg.cc/hGBXQ0Bb/ll.png">
-  <meta property="twitter:image" content="https://i.postimg.cc/hGBXQ0Bb/ll.png">
+  <meta property="og:image" content="https://i.postimg.cc/4ypSGyJ4/web-scraping-big.jpg">
+  <meta property="twitter:image" content="https://i.postimg.cc/4ypSGyJ4/web-scraping-big.jpg">
 
 
 
@@ -70,14 +66,14 @@ Step 1: Install Git Git is a free and open source distributed version control sy
   <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
 
 
-    <title>How to build a personal website on Github Pages using Hugo</title>
+    <title>Web Scraping for preparing training data for Machine Translation</title>
 
     <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://linlin-li-1.github.io/2020/08/how-to-build-a-personal-website-on-github-pages-using-hugo/">
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/10/web-scraping-for-preparing-training-data-for-machine-translation/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -227,15 +223,15 @@ Step 1: Install Git Git is a free and open source distributed version control sy
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      How to build a personal website on Github Pages using Hugo
+      Web Scraping for preparing training data for Machine Translation
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-08-21T13:14:00-04:00">
+      <time itemprop="datePublished" datetime="2020-10-03T14:40:27-04:00">
         
-  August 21, 2020
+  October 3, 2020
 
       </time>
     
@@ -254,93 +250,110 @@ Step 1: Install Git Git is a free and open source distributed version control sy
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>In this article, I would share my experiences and the steps I took when building a personal website on <a href="https://pages.github.com/">GitHub Pages</a> using <a href="https://gohugo.io/">Hugo</a>. To build a personal website, you don&rsquo;t need to have knowledge other than writing Markdown. It&rsquo;s simple, let&rsquo;s go!</p>
-<p>You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/Linlin-Li-1.github.io">here</a>.</p>
-<h3 id="step-1-install-git">Step 1: Install Git</h3>
-<p><a href="https://git-scm.com/">Git</a> is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</p>
-<p>Git can be installed on macOS, Windows and Linux. In fact, Git comes installed by default on most macOS and Linux machines. You can read and follow the <a href="https://github.com/git-guides/install-git">Git installation instructions</a> to install Git.</p>
-<p>On my macOS, Git is already installed. You can easily check by opening the command prompt &ldquo;<a href="https://en.wikipedia.org/wiki/Terminal_(macOS)">Terminal</a>&rdquo; and run the following command to verify Git was installed.</p>
-<pre><code>git version  ##check git version
-</code></pre><h3 id="step-2-install-hugo">Step 2: Install Hugo</h3>
-<p><a href="https://gohugo.io/">Hugo</a> is a fast static website generator written in <a href="https://golang.org/">Go</a>. Unlike systems that dynamically build a page with each visitor request, Hugo builds pages when you create or update your content. Hugo takes data files, configuration, templates for layouts, static files, and content written in Markdown and renders a static website.</p>
-<p>Hugo can be installed on macOS, Windows, and Linux with the <a href="https://gohugo.io/getting-started/installing/">Hugo installation instructions</a>. <strong>And you don’t need to install Go to enjoy Hugo.</strong></p>
-<p>On my macOS, I first installed <a href="https://brew.sh/">Homebrew</a> by running the following command in Terminal. (You can find other <a href="https://docs.brew.sh/Installation">installation options</a>.)</p>
-<pre><code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;
-</code></pre><p>You can then verify Homebrew is installed by</p>
-<pre><code>brew help
-</code></pre><p>After that, run the followng command to install Hugo.</p>
-<pre><code>brew install hugo
-</code></pre><p>When finished, verify that hugo runs correctly by</p>
-<pre><code>hugo version  ##check hugo version
-</code></pre><h3 id="step-3-create-a-hugo-site">Step 3: Create a Hugo Site</h3>
-<p>Find a place to store the Hugo site folder. I put it in my desktop by</p>
-<pre><code>cd desktop  ##change directory
-</code></pre><p>Then create a new Hugo site by</p>
-<pre><code>hugo new site blog  ##blog is the filename
-</code></pre><h3 id="step-4-customize-your-hugo-site">Step 4: Customize Your Hugo Site</h3>
-<p><a href="https://themes.gohugo.io/">Here</a> you can find numerous Hugo Themes. You can choose one and copy the download address. For example, I chose the <a href="https://themes.gohugo.io/hugo-tranquilpeak-theme/">Tranquilpeak</a>.</p>
-<ol>
-<li>Go to your Hugo site directory.</li>
-</ol>
-<pre><code>cd blog  ##change directory
-</code></pre><ol start="2">
-<li>Download the Hugo theme.</li>
-</ol>
-<pre><code>git clone https://github.com/kakawait/hugo-tranquilpeak-theme.git themes/tranquilpeak
-</code></pre><ol start="3">
-<li>Copy the configuration file that comes with the theme and replace the default configuration file with it.</li>
-</ol>
-<pre><code>cp themes/tranquilpeak/exampleSite/config.toml .  
-</code></pre><p><strong>Note: please be careful to include . at the end of the command line.</strong></p>
-<ol start="4">
-<li>Edit the configuration file <code>config.toml</code></li>
-</ol>
-<p>You need to change <code>baseURL = &quot;your_github_name.github.io&quot;</code> and <code>theme = &quot;tranquilpeak&quot;</code>. Here, you should replace your_github_name with exactly your github name. You can use <a href="https://www.dummies.com/web-design-development/web-hosting/how-to-edit-files-with-vi/">vi</a> in Terminal or use <a href="https://code.visualstudio.com/">VS Code</a> to do this.</p>
-<p>Take vi for example.</p>
-<pre><code>vim config.toml  ##open and edit file
-</code></pre><p>After editing the file, press <code>esc</code> and then input <code>:wq</code> to save the changes and exit vi.</p>
-<h3 id="step-5-write-a-new-post">Step 5: Write a new post</h3>
-<ol>
-<li>Create a folder to store posts.</li>
-</ol>
-<pre><code>mkdir content/post  ##create a folder
-</code></pre><ol start="2">
-<li>Create a new post.</li>
-</ol>
-<pre><code>hugo new content/post/first.md  ##&quot;first.md&quot; is the file name of the new post. 
-</code></pre><ol start="3">
-<li>Edit the newly created post and add some content.</li>
-</ol>
-<h3 id="step-6-preview-your-site">Step 6: Preview your site</h3>
-<p>If you are ready, start the Hugo server.</p>
-<pre><code>hugo server -D
-</code></pre><p>You can preview your site at <a href="http://localhost:1313/">http://localhost:1313/</a>.</p>
-<h3 id="step-7-build-your-hugo-site">Step 7: Build your Hugo site</h3>
-<p>If you are satisfactory with the preview, build your site by</p>
-<pre><code>hugo
-</code></pre><p>After execution, a &ldquo;public&rdquo; directory will be added. This directory is a static file. Just upload the files in this folder.</p>
-<h3 id="step-8-connect-to-github">Step 8: Connect to Github</h3>
-<p>Set global user name and user email with Github.</p>
-<pre><code>git config --global user.name &quot;your_github_name&quot;
-git config --global user.email &quot;your_github_email&quot;
-</code></pre><h3 id="step-9-create-a-new-github-repository">Step 9: Create a new Github repository</h3>
-<ol>
-<li>
-<p>Create a <a href="https://github.com/">Github</a> account.</p>
-</li>
-<li>
-<p>Create a new repository named &ldquo;your_github_name.github.io&rdquo;, where your_github_name is your username on GitHub.
-Please be careful not to initialize this repo with a README.</p>
-</li>
-</ol>
-<h3 id="step-10-publish-your-hugo-site-to-github-pages">Step 10: Publish your Hugo Site to Github Pages</h3>
-<pre><code>cd public  ##go to the directory to publish
-git init  ##initialize a git repo
-git add .  ##add all edited files
-git commit -m 'first commit'  ##'first commit' is the commit message
-git remote add origin git@github.com:your_github_name/your_github_name.github.io.git  ##link to git repo
-git push -u  origin master  ##push your changes
-</code></pre><p>After that, you are done! Go to <a href="https://your_github_name.github.io">https://your_github_name.github.io</a> to see your new site.</p>
+              <p>During my internship at Birch.ai, we want to test and improve the performance of our machine translation model. To achieve this, we first need to obtain a foreign language data set and its corresponding English data set, and hope that these data sets are translated by humans rather than machine translations.</p>
+
+<p>In this article, I would share my experience in scraping <a href="https://nejm.jp/">The New England Journal of Medicine</a> from scratch using Python. I obtained 15,584 records in both Japanese and English. In addition, in order to preserve the original reference, I kept the URLs of different versions. You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/jp_en-scraping">here</a>.</p>
+
+<h2 id="1-scrape-all-journals-in-a-volume-with-a-valid-page-number">1. Scrape all journals in a volume with a valid page number</h2>
+
+<p>Since this publication is semi-annual, it releases two volumes a year. To scrape all feasible journals (that have both the English version and the Japanese version) from a volume, I wrote a function called <code>search_page</code>.</p>
+<pre><code>def search_page(vol, page):
+    print(f&#39;Scraping from volume {vol} page {page}&#39;, end = &#34;:\t&#34;)
+    url = f&#34;https://nejm.jp/abstract/vol{vol}.p{page}&#34;
+    headers = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36&#39;}
+    page = requests.get(url, headers = headers)
+    soup = BeautifulSoup(page.content)
+    results = [parag.text for parag in soup.select(&#34;.add&#34;)]
+    try:
+        new = soup.select(&#34;#sectionWrap a&#34;)[0].attrs[&#39;href&#39;]
+    except Exception:
+        print(&#34;0 training sets added.&#34;)
+        return []
+    en_page = requests.get(new, headers = headers)
+    en_soup = BeautifulSoup(en_page.content)
+    en_results = [parag.text for parag in en_soup.select(&#34;#article_Abstract .f-body&#34;)]
+    if not en_results:
+        en_results = [parag.text for parag in en_soup.select(&#34;#article_body .f-body&#34;)]
+    tmp = [(url, jp, new, en) for jp, en in zip(results, en_results)]
+    print(f&#34;{len(tmp)} training sets added.&#34;)
+    return tmp</code></pre>
+<h2 id="2-search-all-valid-page-numbers-in-a-volume">2. Search all valid page numbers in a volume</h2>
+
+<p>Since the page numbers of a journal are irregular, I scraped the catalogue of a journal to obtain all valid page numbers.</p>
+<pre><code>def search_volumn(vol, num):
+    url = f&#34;https://nejm.jp/contents/idx.vol{vol}.no{num}&#34;
+    headers = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36&#39;}
+    page = requests.get(url, headers = headers)
+    soup = BeautifulSoup(page.content)
+    results = [int(re.match(&#39;/abstract/vol\d+.p(\d+)&#39;, parag.attrs[&#39;href&#39;])[1]) for parag in soup.select(&#34;.link02 a&#34;)]
+    if not soup.select(&#34;.pageNum&#34;):
+        raise Exception(&#34;No items found.&#34;)
+    return sum([search_page(vol, page) for page in results], [])</code></pre>
+<h2 id="3-scrape-all-journals-from-the-start-volume-to-the-end-volume">3. Scrape all journals from the start volume to the end volume</h2>
+
+<p>I wrote a function called <code>search_all</code> to obtain all contents from feasible journals from the oldest volume to the latest one. This function can be used to scrape contents for any valid volume.</p>
+<pre><code>def search_all(vol_start = 336, vol_end = None):
+    vol, num = vol_start, 1
+    total_results = []
+    vol_results = []
+    while not vol_end or vol &lt;= vol_end:
+        try:
+            vol_results += search_volumn(vol, num)
+            num += 1
+        except Exception as e:
+            if num == 1:
+                break
+            if vol_results:
+                pd.DataFrame(vol_results, columns = [&#39;jp_url&#39;, &#39;jp_txt&#39;, &#39;en_url&#39;, &#39;en_txt&#39;]).to_csv(f&#39;jp_en/vol_{vol}.csv&#39;, index = False)
+                total_results += vol_results
+                vol_results = []
+            vol, num = vol + 1, 1
+    return total_results</code></pre>
+<h2 id="final-table">Final Table</h2>
+
+<p>I split the final table into two parts to better see it.</p>
+
+<table>
+<thead>
+<tr>
+<th>jp_url</th>
+<th>jp_txt</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://nejm.jp/abstract/vol337.p141">https://nejm.jp/abstract/vol337.p141</a></td>
+<td>腫瘍壊死因子（TNF）は，リウマチ性関節炎の発病に関与する炎症促進性サイトカインであるため，TNF の拮抗により，疾患の活動性が低下する可能性がある．本試験は，ヒト IgG1 の Fc 部分と結合した可溶性 TNF 受容体（p75）（TNFR:Fc）から成る遺伝子組換え型融合蛋白である新規 TNF 拮抗剤の安全性および有効性を評価した．</td>
+</tr>
+
+<tr>
+<td><a href="https://nejm.jp/abstract/vol337.p141">https://nejm.jp/abstract/vol337.p141</a></td>
+<td>この多施設二重盲検臨床試験では，難治性リウマチ性関節炎患者 180 人を無作為割付けし，プラセボまたは TNFR:Fc の 3 用量の一つ（0.25，2，16 mg/m2 体表面積）を週 2 回，3 ヵ月間皮下注射した．アメリカリウマチ学会基準にしたがって定義した関節炎の複合症状の変化によって，臨床効果を測定した．</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>en_url</th>
+<th>en_txt</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://www.nejm.org/doi/full/10.1056/NEJM199707173370301">https://www.nejm.org/doi/full/10.1056/NEJM199707173370301</a></td>
+<td>Tumor necrosis factor (TNF) is a proinflammatory cytokine involved in the pathogenesis of rheumatoid arthritis, and antagonism of TNF may reduce the activity of the disease. This study evaluated the safety and efficacy of a novel TNF antagonist — a recombinant fusion protein that consists of the soluble TNF receptor (p75) linked to the Fc portion of human IgG1 (TNFR:Fc).</td>
+</tr>
+
+<tr>
+<td><a href="https://www.nejm.org/doi/full/10.1056/NEJM199707173370301">https://www.nejm.org/doi/full/10.1056/NEJM199707173370301</a></td>
+<td>In this multicenter, double-blind trial, we randomly assigned 180 patients with refractory rheumatoid arthritis to receive subcutaneous injections of placebo or one of three doses of TNFR:Fc (0.25, 2, or 16 mg per square meter of body-surface area) twice weekly for three months. The clinical response was measured by changes in composite symptoms of arthritis defined according to American College of Rheumatology criteria.</td>
+</tr>
+</tbody>
+</table>
 
               
             </div>
@@ -353,9 +366,9 @@ git push -u  origin master  ##push your changes
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/hugo/">Hugo</a>
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/data-scraping/">Data Scraping</a>
 
-  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/github-pages/">Github Pages</a>
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
 
                   </div>
                 
@@ -368,7 +381,7 @@ git push -u  origin master  ##push your changes
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/08/3-problems-on-euler-project/" data-tooltip="3 problems on Euler Project">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -376,7 +389,7 @@ git push -u  origin master  ##push your changes
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/08/welcome/" data-tooltip="Welcome!">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/" data-tooltip="Create a Sqlite3 database for Spotify songs data">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -426,7 +439,7 @@ git push -u  origin master  ##push your changes
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/08/3-problems-on-euler-project/" data-tooltip="3 problems on Euler Project">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -434,7 +447,7 @@ git push -u  origin master  ##push your changes
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/08/welcome/" data-tooltip="Welcome!">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/" data-tooltip="Create a Sqlite3 database for Spotify songs data">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
