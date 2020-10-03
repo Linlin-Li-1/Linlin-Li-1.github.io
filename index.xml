@@ -6,17 +6,27 @@
     <description>Recent content on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Sep 2020 12:08:26 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 01:51:47 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>How terrible is malaria?</title>
-      <link>https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria/</link>
+      <title>Create a Sqlite3 database for Spotify songs data</title>
+      <link>https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/</link>
+      <pubDate>Sat, 03 Oct 2020 01:51:47 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/</guid>
+      <description>In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
+Step 0: load data At the beginning, I use pandas.read_csv to load the data.</description>
+    </item>
+    
+    <item>
+      <title>How terrible is malaria? (Data visualization with Python)</title>
+      <link>https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria-data-visualization-with-python/</link>
       <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
       
-      <guid>https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria/</guid>
+      <guid>https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria-data-visualization-with-python/</guid>
       <description>Malaria is a serious and sometimes fatal disease caused by a parasite that commonly infects a certain type of mosquito which feeds on humans. People who get malaria are typically very sick with high fevers, shaking chills, and flu-like illness. Because malaria causes so much illness and death, the disease is a great drain on many national economies. Since many countries with malaria are already among the poorer nations, the disease maintains a vicious cycle of disease and poverty.</description>
     </item>
     

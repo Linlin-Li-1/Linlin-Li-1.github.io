@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Linlin Li">
+<meta name="keywords" content="Python, Sqlite3">
+<meta name="description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
+Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+
+
+<meta property="og:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
+Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Create a Sqlite3 database for Spotify songs data">
+<meta name="twitter:title" content="Create a Sqlite3 database for Spotify songs data">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
+<meta property="og:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
+Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta name="twitter:description" content="In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog here. Data source: https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21.
+Step 0: load data At the beginning, I use pandas.read_csv to load the data.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-10-03T01:51:47">
+  
+  
+    <meta property="article:modified_time" content="2020-10-03T01:51:47">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Spotify songs data">
+    
+      <meta property="article:tag" content="Sqlite3">
+    
+      <meta property="article:tag" content="Python">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://i.postimg.cc/Qt9mfz9Z/unnamed.png">
+  <meta property="twitter:image" content="https://i.postimg.cc/Qt9mfz9Z/unnamed.png">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+
+
+    <title>Create a Sqlite3 database for Spotify songs data</title>
+
+    <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/10/create-a-sqlite3-database-for-spotify-songs-data/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://linlin-li-1.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://linlin-li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://linlin-li-1.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://linlin-li-1.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Linlin Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong></h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:linlin.li434@duke.edu" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Linlin-Li-1" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/linlin-li/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Create a Sqlite3 database for Spotify songs data
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-03T01:51:47-04:00">
+        
+  October 3, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://linlin-li-1.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>In this article, I would share my experience in creating a Sqlite3 database to store Spotify songs data in the 3rd Normal Form using Python. It is quite easy, everyone who has some basic Python skills can follow my steps and try to do it. You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/spotify_sql">here</a>. Data source: <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21">https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-01-21</a>.</p>
+
+<h2 id="step-0-load-data">Step 0: load data</h2>
+
+<p>At the beginning, I use <code>pandas.read_csv</code> to load the data.</p>
+<pre><code>import numpy as np
+import pandas as pd
+import sqlite3
+import warnings
+warnings.simplefilter(&#39;ignore&#39;, FutureWarning)
+%load_ext sql
+df = pd.read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-21/spotify_songs.csv&#39;)</code></pre>
+<h2 id="step-1-check-duplication">Step 1: check duplication</h2>
+<pre><code>## check duplicates
+df.duplicated().any()  ## False</code></pre>
+<p>There seem to be no duplicate rows in the data frame. Even though the number of unique <code>track_id</code> is obviously less than the number of rows in the data frame. Since they are not exactly the same rows, we should keep them (I found that the only difference between rows with the same <code>track_id</code> is on the playlist, so I think they contains information).</p>
+
+<h2 id="step-2-convert-the-data-frame-into-1st-normal-form">Step 2: Convert the data frame into 1st normal form</h2>
+
+<p>The 1st normal form requires that each element contains only a single entry, in other words, we should split composite entries. After checking with the data, it does not seem to have any compound entries, so the data frame already satisfies the 1st normal form.</p>
+
+<h2 id="step-3-convert-the-data-frame-into-2nd-normal-form">Step 3: Convert the data frame into 2nd normal form</h2>
+
+<p>To achieve the 2nd normal form, we first need to identify candidate Primary Key. In the codebook, <code>track_id</code> represents the unique ID for each song, so it could be considered as a potential Primary Key. We then need to identify partial dependencies in the original big data frame and break it into several small data frame based on dependencies.</p>
+<pre><code>df.columns
+
+## playlist
+playlist = df[df.duplicated(subset=[&#39;playlist_id&#39;])]
+playlist.sort_values(by = [&#39;playlist_id&#39;], axis=0)[[&#39;playlist_id&#39;,&#39;playlist_name&#39;,&#39;playlist_genre&#39;,&#39;playlist_subgenre&#39;]]
+df_playlist = df[[&#39;playlist_id&#39;, &#39;playlist_name&#39;, &#39;playlist_genre&#39;, &#39;playlist_subgenre&#39;]].drop_duplicates()
+
+## album
+album = df[df.duplicated(subset=[&#39;track_album_id&#39;])]
+album.sort_values(by = [&#39;track_album_id&#39;], axis=0)[[&#39;track_album_id&#39;, &#39;track_album_name&#39;, &#39;track_album_release_date&#39;]]
+df_album = df[[&#39;track_album_id&#39;,&#39;track_album_name&#39;, &#39;track_album_release_date&#39;]].drop_duplicates()
+
+## song
+song = df[df.duplicated(subset=[&#39;track_id&#39;])]
+song.sort_values(by = [&#39;track_id&#39;], axis=0)[[&#39;track_id&#39;,&#39;track_name&#39;, &#39;track_artist&#39;,&#39;track_popularity&#39;, &#39;danceability&#39;, &#39;energy&#39;, &#39;key&#39;, &#39;loudness&#39;, &#39;mode&#39;, &#39;speechiness&#39;,
+                                             &#39;acousticness&#39;, &#39;instrumentalness&#39;, &#39;liveness&#39;, &#39;valence&#39;, &#39;tempo&#39;,&#39;duration_ms&#39;]]
+df_song = df[[&#39;track_id&#39;,&#39;track_name&#39;,&#39;track_artist&#39;,&#39;track_popularity&#39;, &#39;danceability&#39;, &#39;energy&#39;, &#39;key&#39;, &#39;loudness&#39;, &#39;mode&#39;, &#39;speechiness&#39;,
+       &#39;acousticness&#39;, &#39;instrumentalness&#39;, &#39;liveness&#39;, &#39;valence&#39;, &#39;tempo&#39;, &#39;duration_ms&#39;]].drop_duplicate()
+
+df_song_playlist = df[[&#39;track_id&#39;, &#39;playlist_id&#39;]].drop_duplicates()
+df_song_album = df[[&#39;track_id&#39;, &#39;track_album_id&#39;]].drop_duplicates()</code></pre>
+<h2 id="step-4-convert-the-data-frame-into-3rd-normal-form">Step 4: Convert the data frame into 3rd normal form</h2>
+
+<p>To achieve the 3rd normal form, we should remove transitive dependencies, where a column totally depends on a column that is not Primary Key. In this case, since the subgenre of playlist determines the genre of playlist, we can create a new data frame to connect <code>playlist_subgenre</code> and <code>playlist_genre</code>.</p>
+<pre><code>df_playlist_ = df_playlist[[&#39;playlist_id&#39;, &#39;playlist_name&#39;, &#39;playlist_subgenre&#39;]]
+df_playlist_genre = df_playlist[[&#39;playlist_subgenre&#39;, &#39;playlist_genre&#39;]].drop_duplicates()</code></pre>
+<p><strong>Finally, we obtain the final tables <code>df_song</code>, <code>df_song_album</code>, <code>df_song_playlist</code>, <code>df_playlist_</code>, <code>df_playlist_genre</code> and <code>df_album</code>.</strong></p>
+
+<h2 id="step-5-store-it-as-a-sqlite3-database">Step 5: Store it as a Sqlite3 database</h2>
+<pre><code># Create a database to connect to in memory
+cr = sqlite3.connect(&#39;spotify.db&#39;)
+
+# Store dataframes in the database
+df_song.to_sql(name=&#39;df_song&#39;, con=cr, index = False)
+df_song_album.to_sql(name=&#39;df_song_album&#39;, con=cr, index = False)
+df_song_playlist.to_sql(name=&#39;df_song_playlist&#39;, con=cr, index = False)
+df_playlist_.to_sql(name=&#39;df_playlist&#39;, con=cr, index = False)
+df_playlist_genre.to_sql(name=&#39;df_playlist_genre&#39;, con=cr, index = False)
+df_album.to_sql(name=&#39;df_album&#39;, con=cr, index = False)</code></pre>
+<p>We store all the final tables in <code>spotify.db</code>.</p>
+
+<h2 id="connect-to-our-sqlite3-database">Connect to our Sqlite3 database</h2>
+<pre><code>%load_ext sql ## load extension
+%sql sqlite:///spotify.db ## connect to the database
+
+%%sql
+SELECT * FROM sqlite_master WHERE type=&#39;table&#39;;  ## get all tables in this database</code></pre>
+<table>
+<thead>
+<tr>
+<th align="right">type</th>
+<th align="right">name</th>
+<th align="right">tbl_name</th>
+<th align="right">rootpage</th>
+<th align="right">sql</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">table</td>
+<td align="right">df_song</td>
+<td align="right">df_song</td>
+<td align="right">2</td>
+<td align="right">CREATE TABLE &quot;df_song&quot; ( &quot;track_id&quot; TEXT, &quot;track_name&quot; TEXT, &quot;track_artist&quot; TEXT, &quot;track_popularity&quot; INTEGER, &quot;danceability&quot; REAL, &quot;energy&quot; REAL, &quot;key&quot; INTEGER, &quot;loudness&quot; REAL, &quot;mode&quot; INTEGER, &quot;speechiness&quot; REAL, &quot;acousticness&quot; REAL, &quot;instrumentalness&quot; REAL, &quot;liveness&quot; REAL, &quot;valence&quot; REAL, &quot;tempo&quot; REAL, &quot;duration_ms&quot; INTEGER )</td>
+</tr>
+
+<tr>
+<td align="right">table</td>
+<td align="right">df_song_album</td>
+<td align="right">df_song_album</td>
+<td align="right">1041</td>
+<td align="right">CREATE TABLE &quot;df_song_album&quot; ( &quot;track_id&quot; TEXT, &quot;track_album_id&quot; TEXT )</td>
+</tr>
+
+<tr>
+<td align="right">table</td>
+<td align="right">df_song_playlist</td>
+<td align="right">df_song_playlist</td>
+<td align="right">1408</td>
+<td align="right">CREATE TABLE &quot;df_song_playlist&quot; ( &quot;track_id&quot; TEXT, &quot;playlist_id&quot; TEXT )</td>
+</tr>
+
+<tr>
+<td align="right">table</td>
+<td align="right">df_playlist</td>
+<td align="right">df_playlist</td>
+<td align="right">1826</td>
+<td align="right">CREATE TABLE &quot;df_playlist&quot; ( &quot;playlist_id&quot; TEXT, &quot;playlist_name&quot; TEXT, &quot;playlist_subgenre&quot; TEXT )</td>
+</tr>
+
+<tr>
+<td align="right">table</td>
+<td align="right">df_playlist_genre</td>
+<td align="right">df_playlist_genre</td>
+<td align="right">1835</td>
+<td align="right">CREATE TABLE &quot;df_playlist_genre&quot; ( &quot;playlist_subgenre&quot; TEXT, &quot;playlist_genre&quot; TEXT )</td>
+</tr>
+
+<tr>
+<td align="right">table</td>
+<td align="right">df_album</td>
+<td align="right">df_album</td>
+<td align="right">1836</td>
+<td align="right">CREATE TABLE &quot;df_album&quot; ( &quot;track_album_id&quot; TEXT, &quot;track_album_name&quot; TEXT, &quot;track_album_release_date&quot; TEXT )</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="find-the-names-of-all-playlists-that-contain-instrumentals">Find the names of all playlists that contain instrumentals.</h2>
+<pre><code>%%sql 
+SELECT COUNT(instrumentalness) AS num_instrumentals, playlist_name
+FROM df_song
+INNER JOIN df_song_playlist
+ON df_song_playlist.track_id = df_song.track_id
+INNER JOIN df_playlist
+ON df_playlist.playlist_id = df_song_playlist.playlist_id
+WHERE instrumentalness &gt; 0 
+GROUP BY playlist_name
+ORDER BY num_instrumentals DESC
+LIMIT 10</code></pre>
+<table>
+<thead>
+<tr>
+<th align="right">num_instrumentals</th>
+<th align="right">playlist_name</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">222</td>
+<td align="right">Indie Poptimism</td>
+</tr>
+
+<tr>
+<td align="right">196</td>
+<td align="right">Fitness Workout Electro | House | Dance | Progressive House</td>
+</tr>
+
+<tr>
+<td align="right">184</td>
+<td align="right">Permanent Wave</td>
+</tr>
+
+<tr>
+<td align="right">172</td>
+<td align="right">Ultimate Indie Presents... Best Indie Tracks of the 2010s</td>
+</tr>
+
+<tr>
+<td align="right">153</td>
+<td align="right">Hard Rock Workout</td>
+</tr>
+
+<tr>
+<td align="right">138</td>
+<td align="right">Classic Rock 70s 80s 90s, Rock Classics - 70s Rock, 80s Rock, 90s Rock Rock Classicos</td>
+</tr>
+
+<tr>
+<td align="right">129</td>
+<td align="right">2020 Hits &amp; 2019 Hits – Top Global Tracks 🔥🔥🔥</td>
+</tr>
+
+<tr>
+<td align="right">116</td>
+<td align="right">permanent wave</td>
+</tr>
+
+<tr>
+<td align="right">114</td>
+<td align="right">EDM 2020 House &amp; Dance</td>
+</tr>
+
+<tr>
+<td align="right">111</td>
+<td align="right">Urban Contemporary</td>
+</tr>
+</tbody>
+</table>
+<pre><code>%%sql 
+SELECT COUNT(*)
+FROM
+(SELECT SUM(instrumentalness) AS num_instrumentals, playlist_name
+FROM df_song
+INNER JOIN df_song_playlist
+ON df_song_playlist.track_id = df_song.track_id
+INNER JOIN df_playlist
+ON df_playlist.playlist_id = df_song_playlist.playlist_id
+GROUP BY playlist_name
+HAVING num_instrumentals &gt; 0 
+ORDER BY num_instrumentals DESC)</code></pre>
+<table>
+<thead>
+<tr>
+<th>COUNT(*)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>449</td>
+</tr>
+</tbody>
+</table>
+
+<p>We can see that there are 449 playlists that contains at least one song that contains instrumentals. <code>Indie Poptimism</code> contains most songs with instrumentals.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/spotify-songs-data/">Spotify songs data</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/sqlite3/">Sqlite3</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria-data-visualization-with-python/" data-tooltip="How terrible is malaria? (Data visualization with Python)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Linlin Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/09/how-terrible-is-malaria-data-visualization-with-python/" data-tooltip="How terrible is malaria? (Data visualization with Python)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Linlin Li</h4>
+    
+      <div id="about-card-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong></div>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Durham, NC
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://i.postimg.cc/xCkJPyMv/blue.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://linlin-li-1.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
