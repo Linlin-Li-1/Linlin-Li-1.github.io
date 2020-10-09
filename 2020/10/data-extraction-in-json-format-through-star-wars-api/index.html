@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Linlin Li">
+<meta name="keywords" content="Python, Star Wars API">
+<meta name="description" content="Star Wars API (SWAPI) is the world&#39;s first quantitative Star Wars data set that can be used for programming. The developers have aggregated multiple types of entity data involved in the Star Wars series of movies. It also provides a Python programming language package, swapi-python, which is built by the author of swapi, Paul Hallett. The six APIs correspond to six types of entities:
+ Films：http://swapi.co/api/films/1 People：http://swapi.co/api/people/1 Starships：http://swapi.co/api/starships/1 Vehicles：http://swapi.co/api/vehicles/1 Species：http://swapi.">
+
+
+<meta property="og:description" content="Star Wars API (SWAPI) is the world&#39;s first quantitative Star Wars data set that can be used for programming. The developers have aggregated multiple types of entity data involved in the Star Wars series of movies. It also provides a Python programming language package, swapi-python, which is built by the author of swapi, Paul Hallett. The six APIs correspond to six types of entities:
+ Films：http://swapi.co/api/films/1 People：http://swapi.co/api/people/1 Starships：http://swapi.co/api/starships/1 Vehicles：http://swapi.co/api/vehicles/1 Species：http://swapi.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Extraction in JSON format through Star Wars API">
+<meta name="twitter:title" content="Data Extraction in JSON format through Star Wars API">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/10/data-extraction-in-json-format-through-star-wars-api/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/data-extraction-in-json-format-through-star-wars-api/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
+<meta property="og:description" content="Star Wars API (SWAPI) is the world&#39;s first quantitative Star Wars data set that can be used for programming. The developers have aggregated multiple types of entity data involved in the Star Wars series of movies. It also provides a Python programming language package, swapi-python, which is built by the author of swapi, Paul Hallett. The six APIs correspond to six types of entities:
+ Films：http://swapi.co/api/films/1 People：http://swapi.co/api/people/1 Starships：http://swapi.co/api/starships/1 Vehicles：http://swapi.co/api/vehicles/1 Species：http://swapi.">
+<meta name="twitter:description" content="Star Wars API (SWAPI) is the world&#39;s first quantitative Star Wars data set that can be used for programming. The developers have aggregated multiple types of entity data involved in the Star Wars series of movies. It also provides a Python programming language package, swapi-python, which is built by the author of swapi, Paul Hallett. The six APIs correspond to six types of entities:
+ Films：http://swapi.co/api/films/1 People：http://swapi.co/api/people/1 Starships：http://swapi.co/api/starships/1 Vehicles：http://swapi.co/api/vehicles/1 Species：http://swapi.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-10-09T13:26:07">
+  
+  
+    <meta property="article:modified_time" content="2020-10-09T13:26:07">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Python">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://i.postimg.cc/JngtGLG7/Star-wars-logo-new-tall.jpg">
+  <meta property="twitter:image" content="https://i.postimg.cc/JngtGLG7/Star-wars-logo-new-tall.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+
+
+    <title>Data Extraction in JSON format through Star Wars API</title>
+
+    <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/10/data-extraction-in-json-format-through-star-wars-api/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://linlin-li-1.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://linlin-li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://linlin-li-1.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://linlin-li-1.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Linlin Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:linlin.li434@duke.edu" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Linlin-Li-1" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/linlin-li/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Data Extraction in JSON format through Star Wars API
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-09T13:26:07-04:00">
+        
+  October 9, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://linlin-li-1.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>Star Wars API (SWAPI) is the world's first quantitative Star Wars data set that can be used for programming. The developers have aggregated multiple types of entity data involved in the Star Wars series of movies. It also provides a Python programming language package, <code>swapi-python</code>, which is built by the author of swapi, Paul Hallett. The six APIs correspond to six types of entities:</p>
+
+<ul>
+<li>Films：<a href="http://swapi.co/api/films/1">http://swapi.co/api/films/1</a></li>
+<li>People：<a href="http://swapi.co/api/people/1">http://swapi.co/api/people/1</a></li>
+<li>Starships：<a href="http://swapi.co/api/starships/1">http://swapi.co/api/starships/1</a></li>
+<li>Vehicles：<a href="http://swapi.co/api/vehicles/1">http://swapi.co/api/vehicles/1</a></li>
+<li>Species：<a href="http://swapi.co/api/species/1">http://swapi.co/api/species/1</a></li>
+<li>Planets：<a href="http://swapi.co/api/planets/1">http://swapi.co/api/planets/1</a></li>
+</ul>
+
+<p>You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/Explore-Star-Wars-universe">here</a>.</p>
+
+<h2 id="get-information-for-all-characters">Get information for all characters</h2>
+
+<p>It is quite convenient to get data about characters through SWAPI. Just one line code.</p>
+<pre><code>characters = requests.get(&#39;https://swapi.dev/api/people/&#39;).json()</code></pre>
+<p>Here, we extracted all pages that contains characters. But the format is annoying and has no structure.
+So I wrote a small loop to extract all characters and convert them into a pandas DataFrame.</p>
+<pre><code>people = []
+for i in range(len(characters[&#39;results&#39;])):
+    print(len(characters[&#39;results&#39;]), &#39; people are found!&#39;)
+    people.append(characters[&#39;results&#39;][i])
+    
+while characters[&#39;next&#39;] is not None:
+    characters = requests.get(characters[&#39;next&#39;]).json()
+    print(len(characters[&#39;results&#39;]), &#39; people are found!&#39;)
+    for i in range(len(characters[&#39;results&#39;])):
+        people.append(characters[&#39;results&#39;][i])
+
+len(people)  ## 82
+people = pd.json_normalize(people)</code></pre>
+<p>There are 82 characters in the Star Wars universe. Table below shows five characters in the Star Wars universe.</p>
+<pre><code>people.sample(5)</code></pre>
+<table>
+<thead>
+<tr>
+<th align="right">name</th>
+<th align="right">height</th>
+<th align="right">mass</th>
+<th align="right">hair_color</th>
+<th align="right">skin_color</th>
+<th align="right">eye_color</th>
+<th align="right">birth_year</th>
+<th align="right">gender</th>
+<th align="right">homeworld</th>
+<th align="right">films</th>
+<th align="right">species</th>
+<th align="right">vehicles</th>
+<th align="right">starships</th>
+<th align="right">created</th>
+<th align="right">edited</th>
+<th align="right">url</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">Owen Lars</td>
+<td align="right">178</td>
+<td align="right">120</td>
+<td align="right">brown, grey</td>
+<td align="right">light</td>
+<td align="right">blue</td>
+<td align="right">52BBY</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/1/">http://swapi.dev/api/planets/1/</a></td>
+<td align="right">[<a href="http://swapi.dev/api/films/1/">http://swapi.dev/api/films/1/</a>, <a href="http://swapi.d..">http://swapi.d..</a>.</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-10T15:52:14.024000Z</td>
+<td align="right">2014-12-20T21:17:50.317000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/6/">http://swapi.dev/api/people/6/</a></td>
+</tr>
+
+<tr>
+<td align="right">Leia Organa</td>
+<td align="right">150</td>
+<td align="right">49</td>
+<td align="right">brown</td>
+<td align="right">light</td>
+<td align="right">brown</td>
+<td align="right">19BBY</td>
+<td align="right">female</td>
+<td align="right"><a href="http://swapi.dev/api/planets/2/">http://swapi.dev/api/planets/2/</a></td>
+<td align="right">[<a href="http://swapi.dev/api/films/1/">http://swapi.dev/api/films/1/</a>, <a href="http://swapi.d..">http://swapi.d..</a>.</td>
+<td align="right">[]</td>
+<td align="right">[<a href="http://swapi.dev/api/vehicles/30/">http://swapi.dev/api/vehicles/30/</a>]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-10T15:20:09.791000Z</td>
+<td align="right">2014-12-20T21:17:50.315000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/5/">http://swapi.dev/api/people/5/</a></td>
+</tr>
+
+<tr>
+<td align="right">Shaak Ti</td>
+<td align="right">178</td>
+<td align="right">57</td>
+<td align="right">none</td>
+<td align="right">red, blue, white</td>
+<td align="right">black</td>
+<td align="right">unknown</td>
+<td align="right">female</td>
+<td align="right"><a href="http://swapi.dev/api/planets/58/">http://swapi.dev/api/planets/58/</a></td>
+<td align="right">[<a href="http://swapi.dev/api/films/5/">http://swapi.dev/api/films/5/</a>, <a href="http://swapi.d..">http://swapi.d..</a>.</td>
+<td align="right">[<a href="http://swapi.dev/api/species/35/">http://swapi.dev/api/species/35/</a>]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">2014-12-20T18:44:01.103000Z</td>
+<td align="right">2014-12-20T21:17:50.486000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/78/">http://swapi.dev/api/people/78/</a></td>
+</tr>
+
+<tr>
+<td align="right">Arvel Crynyd</td>
+<td align="right">unknown</td>
+<td align="right">unknown</td>
+<td align="right">brown</td>
+<td align="right">fair</td>
+<td align="right">brown</td>
+<td align="right">unknown</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/28/">http://swapi.dev/api/planets/28/</a></td>
+<td align="right">[<a href="http://swapi.dev/api/films/3/">http://swapi.dev/api/films/3/</a>]</td>
+<td align="right">[]</td>
+<td align="right">[]</td>
+<td align="right">[<a href="http://swapi.dev/api/starships/28/">http://swapi.dev/api/starships/28/</a>]</td>
+<td align="right">2014-12-18T11:16:33.020000Z</td>
+<td align="right">2014-12-20T21:17:50.367000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/29/">http://swapi.dev/api/people/29/</a></td>
+</tr>
+
+<tr>
+<td align="right">Grievous</td>
+<td align="right">216</td>
+<td align="right">159</td>
+<td align="right">none</td>
+<td align="right">brown, white</td>
+<td align="right">green, yellow</td>
+<td align="right">unknown</td>
+<td align="right">male</td>
+<td align="right"><a href="http://swapi.dev/api/planets/59/">http://swapi.dev/api/planets/59/</a></td>
+<td align="right">[<a href="http://swapi.dev/api/films/6/">http://swapi.dev/api/films/6/</a>]</td>
+<td align="right">[<a href="http://swapi.dev/api/species/36/">http://swapi.dev/api/species/36/</a>]</td>
+<td align="right">[<a href="http://swapi.dev/api/vehicles/60/">http://swapi.dev/api/vehicles/60/</a>]</td>
+<td align="right">[<a href="http://swapi.dev/api/starships/74/">http://swapi.dev/api/starships/74/</a>]</td>
+<td align="right">2014-12-20T19:43:53.348000Z</td>
+<td align="right">2014-12-20T21:17:50.488000Z</td>
+<td align="right"><a href="http://swapi.dev/api/people/79/">http://swapi.dev/api/people/79/</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="find-the-oldest-character">Find the oldest character</h2>
+
+<p>In the codebook, the birth year of each character uses the in-universe standard of BBY or ABY - Before the Battle of Yavin or After the Battle of Yavin. The Battle of Yavin is a battle that occurs at the end of Star Wars episode IV: A New Hope. In this case, characters who were born in BBY are older than those born in ABY. However, there are several characters that we don't know their birth year, so we can't determine whether they are younger or older than the characters with a birth year.</p>
+
+<p>I first split those characters with a birth year into two groups, <code>BBY_people</code> and <code>ABY_people</code>. The former one includes all characters who were born before the Battle of Yavin, and the latter one includes all characters who were born after the Battle of Yavin.</p>
+<pre><code>BBY_people = people[people.birth_year.str.contains(&#39;BBY&#39;)]
+ABY_people = people[people.birth_year.str.contains(&#39;ABY&#39;)]
+BBY_people.shape[0], ABY_people.shape[0] ## (43, 0)</code></pre>
+<p>There are 43 characters born before the Battle of Yavin and there are no characters born after the Battle of Yavin.</p>
+<pre><code>BBY_people = BBY_people.assign(birth_year = BBY_people.birth_year.str.extract(&#39;(\d+)&#39;))
+BBY_people[&#39;birth_year&#39;] = BBY_people[&#39;birth_year&#39;].astype(&#39;int32&#39;)
+BBY_people.loc[BBY_people[&#39;birth_year&#39;].idxmax()]</code></pre>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>Yoda</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>height</td>
+<td>66</td>
+</tr>
+
+<tr>
+<td>mass</td>
+<td>17</td>
+</tr>
+
+<tr>
+<td>hair_color</td>
+<td>white</td>
+</tr>
+
+<tr>
+<td>skin_color</td>
+<td>green</td>
+</tr>
+
+<tr>
+<td>eye_color</td>
+<td>brown</td>
+</tr>
+
+<tr>
+<td>birth_year</td>
+<td>896</td>
+</tr>
+
+<tr>
+<td>gender</td>
+<td>male</td>
+</tr>
+
+<tr>
+<td>homeworld</td>
+<td><a href="http://swapi.dev/api/planets/28/">http://swapi.dev/api/planets/28/</a></td>
+</tr>
+
+<tr>
+<td>films</td>
+<td>[<a href="http://swapi.dev/api/films/2/">http://swapi.dev/api/films/2/</a>, <a href="http://swapi.d..">http://swapi.d..</a>.</td>
+</tr>
+
+<tr>
+<td>species</td>
+<td>[<a href="http://swapi.dev/api/species/6/">http://swapi.dev/api/species/6/</a>]</td>
+</tr>
+
+<tr>
+<td>vehicles</td>
+<td>[]</td>
+</tr>
+
+<tr>
+<td>starships</td>
+<td>[]</td>
+</tr>
+
+<tr>
+<td>created</td>
+<td>2014-12-15T12:26:01.042000Z</td>
+</tr>
+
+<tr>
+<td>edited</td>
+<td>2014-12-20T21:17:50.345000Z</td>
+</tr>
+
+<tr>
+<td>url</td>
+<td><a href="http://swapi.dev/api/people/20/">http://swapi.dev/api/people/20/</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>Yoda is the oldest one among all characters with a birth year.</p>
+
+<p><figure><img src="https://i.postimg.cc/PrN9Wv25/s-l640.jpg" alt="Yoda"></figure></p>
+
+<h2 id="find-the-titles-of-all-the-films-where-the-oldest-character-appeared">Find the titles of all the films where the oldest character appeared</h2>
+<pre><code>[requests.get(url).json()[&#39;title&#39;] for url in BBY_people.loc[BBY_people[&#39;birth_year&#39;].idxmax()][&#39;films&#39;]]</code></pre>
+<table>
+<thead>
+</thead>
+
+<tbody>
+<tr>
+<td><p>['The Empire Strikes Back',
+'Return of the Jedi',
+'The Phantom Menace',
+'Attack of the Clones',
+'Revenge of the Sith']</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>We're done! Yoda is the oldest character among characters with a known birth year. And it appeared in four films.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/web-scraping-for-preparing-training-data-for-machine-translation/" data-tooltip="Web Scraping for preparing training data for Machine Translation">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Linlin Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/web-scraping-for-preparing-training-data-for-machine-translation/" data-tooltip="Web Scraping for preparing training data for Machine Translation">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Linlin Li</h4>
+    
+      <div id="about-card-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</div>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Durham, NC
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://i.postimg.cc/xCkJPyMv/blue.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://linlin-li-1.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
