@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Linlin Li">
+<meta name="keywords" content="Python, Plotly">
+<meta name="description" content="I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?
+To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data.">
+
+
+<meta property="og:description" content="I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?
+To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dashboard for Doctorates Awarded in the United States">
+<meta name="twitter:title" content="Dashboard for Doctorates Awarded in the United States">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
+<meta property="og:description" content="I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?
+To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data.">
+<meta name="twitter:description" content="I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?
+To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-10-21T17:23:49">
+  
+  
+    <meta property="article:modified_time" content="2020-10-21T17:23:49">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Python">
+    
+      <meta property="article:tag" content="Dashboard">
+    
+      <meta property="article:tag" content="Data Visualization">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://i.postimg.cc/x16rVs0H/Ph-D01-800x700.jpg">
+  <meta property="twitter:image" content="https://i.postimg.cc/x16rVs0H/Ph-D01-800x700.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+
+
+    <title>Dashboard for Doctorates Awarded in the United States</title>
+
+    <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://linlin-li-1.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://linlin-li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://linlin-li-1.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://linlin-li-1.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Linlin Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:linlin.li434@duke.edu" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Linlin-Li-1" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/linlin-li/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Dashboard for Doctorates Awarded in the United States
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-21T17:23:49-04:00">
+        
+  October 21, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://linlin-li-1.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?</p>
+
+<p>To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data. In this post, I mainly studied the following questions:</p>
+
+<ul>
+<li>What is the trend in the number of doctorates awarded in the United States over time?</li>
+<li>Over time, what are the trends in the number of doctorates awarded in the United States in different major fields?</li>
+<li>Over time, what are the distribution of the postgraduation plans?</li>
+</ul>
+
+<p>You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/Dashboard-for-PhDs-awarded-in-the-US">here</a>.</p>
+
+<h3 id="overview-of-annual-doctorates-awarded-in-the-united-states">Overview of Annual Doctorates Awarded in the United States</h3>
+
+<p>First of all, I'd like to get a rough idea of the trend in the number of doctorates awarded in the United States each year. I use data in Table 1 (Data Source: <a href="https://ncses.nsf.gov/pubs/nsf19301/data">https://ncses.nsf.gov/pubs/nsf19301/data</a>) and draw a bar graph.</p>
+<pre><code>## data preprocessing
+xls = pd.ExcelFile(&#39;sed17-sr-tab001.xlsx&#39;)
+df1 = xls.parse(&#39;Table 1&#39;, skiprows=3, index_col=None, na_values=[&#39;NA&#39;])
+
+## draw bar plot
+phds_over_time = df1.plot(x = &#39;Year&#39;, y = &#39;Doctorate recipients&#39;, kind = &#39;bar&#39;, title = &#39;Number of Doctorate Recipients from 1958 to 2017&#39;)
+phds_over_time.update_layout(
+    yaxis_title = &#39;Doctorate Recipients&#39;)</code></pre>
+<iframe width="750" height="500" frameborder="0" scrolling="no" src="//plotly.com/~linlinli/1.embed"></iframe>
+
+<p>From the above graph, it is easy to see that the overall trend is increasing, showing that more and more people are choosing to study for a PhD. However, this does not mean that all fields are equally popular for those who choose to pursue a PhD.</p>
+
+<h3 id="major-fields-of-doctorates-awarded-in-the-united-states">Major Fields of Doctorates Awarded in the United States</h3>
+
+<p>In order to figure out which fields are more popular, I drew a stacked bar plot (Data Source: Table 12 from <a href="https://ncses.nsf.gov/pubs/nsf19301/data">https://ncses.nsf.gov/pubs/nsf19301/data</a>) to show the change in fields distribution over time.</p>
+<pre><code>## data preprocessing
+xls = pd.ExcelFile(&#39;sed17-sr-tab012.xlsx&#39;)
+df2 = xls.parse(&#39;Table 12&#39;, skiprows=5, index_col=None, na_values=[&#39;NA&#39;])
+df22 = df2.iloc[:,::2]
+df22.columns=[&#39;All&#39;] + list(range(1987, 2018, 5))
+categories = [&#39;Life sciences&#39;, &#39;Physical sciences and earth sciences&#39;, &#39;Mathematics and computer sciences&#39;, &#39;Psychology and social sciences&#39;, &#39;Engineering&#39;, &#39;Education&#39;, &#39;Humanities and arts&#39;, &#39;Othera&#39;]
+df23 = df22[df22[&#39;All&#39;].isin(categories)]
+df23 = df23.set_index(&#39;All&#39;)
+df23 = df23.T.reset_index()
+df23 = df23.rename(dict(index=&#39;Year&#39;), axis=1)
+df24 = pd.melt(df23, id_vars=[&#39;Year&#39;], value_name=&#39;percent&#39;, var_name=&#39;Field&#39;)
+df24[&#39;percent&#39;] = df24[&#39;percent&#39;].astype(float)
+
+## draw stacked barplot
+majors_over_time = px.bar(df24, x=&#34;Year&#34;, y=&#34;percent&#34;, color=&#34;Field&#34;, title=&#39;Percent of doctorate recipients by Major Field&#39;)</code></pre>
+<iframe width="900" height="600" frameborder="0" scrolling="no" src="//plotly.com/~linlinli/4.embed"></iframe>
+
+<p>It is worth noting that the number of doctorates awarded in <strong>Life Sciences</strong>, <strong>Engineering</strong>, and <strong>Mathematics and computer sciences</strong> continues to increase, while the number of doctorates awarded in <strong>Education</strong> continues to decrease. This indicates that with the rapid development of technology, especially the Internet, people's interests in data, computers and engineering has increased significantly. And it may also indicate that the future competition in these fields will become more and more intense. One following question is what are the popular post-graduation plans for doctorate recipients. How many percent of them choose to do a postdoctoral study? What percentage of them choose employment? Which employment sectors are common?</p>
+
+<h3 id="postgraduation-plans-of-doctorate-recipients-by-field">Postgraduation plans of doctorate recipients by Field</h3>
+
+<p>In order to obtain all specific postgraduation plans for doctorate recipients, I first dive in Table 42 (Data Source: <a href="https://ncses.nsf.gov/pubs/nsf19301/data">https://ncses.nsf.gov/pubs/nsf19301/data</a>). This table contains what percentage of doctorate recipients who have a definite commitment. Then, I link it to Table 44, from which you can get what percentage of doctorate recipients with a definite commitment will do a postdoctoral study or employment. After that, I link these two tables to Table 46, where you can get the employment sectors for those who are determined to choose employment.</p>
+
+<p>Thus, I obtain the percentage of doctorate recipients who did not have a definite commitment, those who are committed to doing a postdoctoral study, and the percentage of those who will work in specific employment sectors. I create an interactive bar plot to display the distribution of their postgraduation plans over time.</p>
+<pre><code>## prepare the no definite commitment data -- Table 42
+xls = pd.ExcelFile(&#39;sed17-sr-tab042.xlsx&#39;)
+df3 = xls.parse(&#39;Table 42&#39;, skiprows=3, index_col=None, na_values=[&#39;NA&#39;])
+definite = df3.iloc[13:18,2:]
+nodefinite = df3.iloc[19:,2:]
+
+## prepare the postdoctoral study data -- Table 44
+xls = pd.ExcelFile(&#39;sed17-sr-tab044.xlsx&#39;)
+postdoctoral = xls.parse(&#39;Table 44&#39;, skiprows=3, index_col=None, na_values=[&#39;NA&#39;])
+postdoctoral = postdoctoral.iloc[19:,2:]
+## calculate the employment in all Postgraduation commitment
+employment = pd.DataFrame(definite.values * (1 - postdoctoral.values / 100), columns=definite.columns)
+## calculate the postdoctoral study in all Postgraduation commitment
+postdoctoral = pd.DataFrame(definite.values * postdoctoral.values / 100, columns=definite.columns)
+
+## prepare the employment data -- Table 46
+xls = pd.ExcelFile(&#39;sed17-sr-tab046.xlsx&#39;)
+df4 = xls.parse(&#39;Table 46&#39;, skiprows=3, index_col=None, na_values=[&#39;NA&#39;])
+academe = pd.DataFrame(employment.values * df4.iloc[7:12, 2:] / 100, columns=definite.columns)
+government = pd.DataFrame(employment.values * df4.iloc[13:18, 2:] / 100, columns=definite.columns)
+industry = pd.DataFrame(employment.values * df4.iloc[19:24, 2:].replace(&#39;D&#39;,0) / 100, columns=definite.columns)
+nonprofit = pd.DataFrame(employment.values * df4.iloc[25:30, 2:].replace(&#39;D&#39;,0) / 100, columns=definite.columns)
+other = pd.DataFrame(employment.values * df4.iloc[31:, 2:].replace(&#39;D&#39;,0) / 100, columns=definite.columns)</code></pre><pre><code>## draw bar plots with a slider
+commitment = go.Figure()
+# Add traces, one for each slider step
+for step in range(5):
+    commitment.add_trace(
+        go.Bar(name=&#39;Postdoctoral Study&#39;, x=postdoctoral.columns, y=postdoctoral.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;Academe&#39;, x=academe.columns, y=academe.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;Government&#39;, x=government.columns, y=government.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;Industry or Business&#39;, x=industry.columns, y=industry.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;Nonprofit Organization&#39;, x=nonprofit.columns, y=nonprofit.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;Other or unknown Employment&#39;, x=other.columns, y=other.iloc[step,:], visible = False)
+    ).add_trace(
+        go.Bar(name=&#39;No Definite Commitment&#39;, x=nodefinite.columns, y=nodefinite.iloc[step,:], visible = False)
+    )
+
+commitment.data[0].visible = True
+commitment.data[1].visible = True
+commitment.data[2].visible = True
+commitment.data[3].visible = True
+commitment.data[4].visible = True
+commitment.data[5].visible = True
+commitment.data[6].visible = True
+
+# Create and add slider
+steps = []
+for i in range(len(commitment.data) // 7):
+    step = dict(
+        method=&#34;update&#34;,
+        args=[{&#34;visible&#34;: [False] * len(commitment.data)},
+              {&#34;title&#34;: &#34;Postgraduation Plan by Major Field in &#34; + str(range(1997, 2022, 5)[i])},
+             ],  # layout attribute
+       label = range(1997, 2022, 5)[i]
+    )
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i] = True  # Toggle i&#39;th trace to &#34;visible&#34;
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 1] = True
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 2] = True
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 3] = True
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 4] = True
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 5] = True
+    step[&#34;args&#34;][0][&#34;visible&#34;][7 * i + 6] = True
+    steps.append(step)
+
+sliders = [dict(
+    active=0,
+    currentvalue={&#34;prefix&#34;: &#34;Year &#34;},
+    pad={&#34;t&#34;: 100},
+    steps=steps,
+    yanchor = &#39;top&#39;
+)]
+
+commitment.update_layout(
+    sliders=sliders,
+    yaxis_title=&#34;percent&#34;,
+    title_x = .50,
+    title_text=&#34;Postgraduation Plan by Major Field&#34;
+)
+
+commitment.show()</code></pre>
+<iframe width="1000" height="600" frameborder="0" scrolling="no" src="//plotly.com/~linlinli/21.embed"></iframe>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/dashboard/">Dashboard</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/data-visualization/">Data Visualization</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/data-extraction-in-json-format-through-star-wars-api/" data-tooltip="Data Extraction in JSON format through Star Wars API">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Linlin Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/data-extraction-in-json-format-through-star-wars-api/" data-tooltip="Data Extraction in JSON format through Star Wars API">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Linlin Li</h4>
+    
+      <div id="about-card-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</div>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Durham, NC
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://i.postimg.cc/xCkJPyMv/blue.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://linlin-li-1.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

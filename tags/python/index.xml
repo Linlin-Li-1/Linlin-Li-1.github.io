@@ -6,10 +6,20 @@
     <description>Recent content in Python on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Oct 2020 13:26:07 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2020 17:23:49 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dashboard for Doctorates Awarded in the United States</title>
+      <link>https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/</link>
+      <pubDate>Wed, 21 Oct 2020 17:23:49 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/</guid>
+      <description>I believe that for graduate students, what to do after graduation may not have been decided yet. Is it a good choice to continue to study for a PhD, or is it a wise choice to find a job in the industry? What will the doctorate bring to students? Which field of doctorate is more popular?
+To answer these questions, I found some historical data about doctorates awarded in the United States to display some information behind the data.</description>
+    </item>
     
     <item>
       <title>Data Extraction in JSON format through Star Wars API</title>

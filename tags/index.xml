@@ -6,15 +6,33 @@
     <description>Recent content in Tags on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Oct 2020 13:26:07 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2020 17:23:49 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Dashboard</title>
+      <link>https://linlin-li-1.github.io/tags/dashboard/</link>
+      <pubDate>Wed, 21 Oct 2020 17:23:49 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/dashboard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data visualization</title>
+      <link>https://linlin-li-1.github.io/tags/data-visualization/</link>
+      <pubDate>Wed, 21 Oct 2020 17:23:49 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/tags/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://linlin-li-1.github.io/tags/python/</link>
-      <pubDate>Fri, 09 Oct 2020 13:26:07 -0400</pubDate>
+      <pubDate>Wed, 21 Oct 2020 17:23:49 -0400</pubDate>
       
       <guid>https://linlin-li-1.github.io/tags/python/</guid>
       <description></description>
@@ -53,15 +71,6 @@
       <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
       
       <guid>https://linlin-li-1.github.io/tags/age-structure/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data visualization</title>
-      <link>https://linlin-li-1.github.io/tags/data-visualization/</link>
-      <pubDate>Mon, 21 Sep 2020 12:08:26 -0400</pubDate>
-      
-      <guid>https://linlin-li-1.github.io/tags/data-visualization/</guid>
       <description></description>
     </item>
     
