@@ -260,6 +260,7 @@ To answer these questions, I found some historical data about doctorates awarded
 <li>What is the trend in the number of doctorates awarded in the United States over time?</li>
 <li>Over time, what are the trends in the number of doctorates awarded in the United States in different major fields?</li>
 <li>Over time, what are the distribution of the postgraduation plans?</li>
+<li>For those doctorates with a definite commitment, what's the expected salary in differnt jobs?</li>
 </ul>
 
 <p>You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/Dashboard-for-PhDs-awarded-in-the-US">here</a>.</p>
@@ -392,6 +393,20 @@ commitment.update_layout(
 
 commitment.show()</code></pre>
 <iframe width="1000" height="600" frameborder="0" scrolling="no" src="//plotly.com/~linlinli/21.embed"></iframe>
+
+<p>The plot reveals a lot of information. Overall, the distribution of postgraduation plans tends to be more equally distributed among different major fields as time goes by. In 1997, most of the doctorate recipients that plan to do postdoctoral studies are in <strong>Life sciences</strong> and <strong>Physical sciences and earth sciences</strong>. In 2017, more doctorate recipients with other majors plan to do postdoctoral studies, especially those who majored in <strong>Mathematics and computer sciences</strong>, <strong>Psychology and social sciences</strong>, and <strong>Engineering</strong>. Specifically, for doctorate recipients who majored in <strong>Mathematics and computer sciences</strong> or <strong>Engineering</strong>, the percentage of pursuing a postdoctoral study continues to increase. However, the percentage of doctorate recipients who majored in <strong>Life sciences</strong> continues to decrease, indicating that some of them now change to choose employment after graduation.</p>
+
+<h3 id="median-expected-basic-annual-salary-of-doctorate-recipients-with-a-definite-commitment">Median expected basic annual salary of doctorate recipients with a definite commitment</h3>
+
+<p>Salary are also an important factor when making postgraduation plans. To obtain the expected salary with different postgraduation plans, I first dive in Table 48 (Data Source: <a href="https://ncses.nsf.gov/pubs/nsf19301/data">https://ncses.nsf.gov/pubs/nsf19301/data</a>). This table contains the median expected basic annual salary of doctorate recipients who have a definite commitment. Then, I link it to Table 49, from which you can get the median expected basic annual salary of doctorate recipients in different employment sectors.</p>
+
+<p>Therefore, I obtain the median expected basic annual salary of doctorate recipients who are committed to doing a postdoctoral study, and the median expected basic annual salary of those who will work in employment sectors. I create a sunburst chart to display the distribution of their median expected basic annual salary.</p>
+
+<iframe width="900" height="600" frameborder="0" scrolling="no" src="//plotly.com/~linlinli/27.embed"></iframe>
+
+<p>It is clear that the expected salary for <strong>postdoctoral study</strong> is much lower than <strong>employment</strong>. And within employment, jobs in industry have the highest expected salary, while jobs in academe have the lowest one.</p>
+
+<p>Thanks for reading. I hope this article can provide some information for those who have not yet decided on their graduation plan.</p>
 
               
             </div>
