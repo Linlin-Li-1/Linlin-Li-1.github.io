@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Linlin Li">
+<meta name="keywords" content="Python, Plotly">
+<meta name="description" content="As we all know, insects are a major factor in the world&#39;s agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.">
+
+
+<meta property="og:description" content="As we all know, insects are a major factor in the world&#39;s agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Image Classification using CNN">
+<meta name="twitter:title" content="Image Classification using CNN">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/10/image-classification-using-cnn/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/10/image-classification-using-cnn/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
+<meta property="og:description" content="As we all know, insects are a major factor in the world&#39;s agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.">
+<meta name="twitter:description" content="As we all know, insects are a major factor in the world&#39;s agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-10-24T04:17:45">
+  
+  
+    <meta property="article:modified_time" content="2020-10-24T04:17:45">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Python">
+    
+      <meta property="article:tag" content="Dashboard">
+    
+      <meta property="article:tag" content="Data Visualization">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://miro.medium.com/max/1280/1*Fw-ehcNBR9byHtho-Rxbtw.gif">
+  <meta property="twitter:image" content="https://miro.medium.com/max/1280/1*Fw-ehcNBR9byHtho-Rxbtw.gif">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+
+
+    <title>Image Classification using CNN</title>
+
+    <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/10/image-classification-using-cnn/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://linlin-li-1.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://linlin-li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://linlin-li-1.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://linlin-li-1.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Linlin Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:linlin.li434@duke.edu" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Linlin-Li-1" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/linlin-li/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Image Classification using CNN
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-24T04:17:45-04:00">
+        
+  October 24, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://linlin-li-1.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>As we all know, insects are a major factor in the world's agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.</p>
+
+<p>Can a computer automatically detect pictures of insects? It turns out that, given high-quality training data, it is very straight-forward to accurately classify images of insects. In this article, I will build a machine learning model to classify images of insects using the <a href="https://www.insectimages.org/index.cfm">Insect Images</a> dataset. I will introduce step by step how to train the model, design the input and output for category classification, and finally display the accuracy results.</p>
+
+<p>You can find my Github repository for this blog <a href="https://github.com/Linlin-Li-1/CNN-for-classification">here</a>.</p>
+
+<h2 id="image-classification">Image Classification</h2>
+
+<p>The problem of image classification is this: given a set of images that are labeled with a single category, we are asked to predict these categories for a new set of images and measure the accuracy of the predictions. How will we write an algorithm that can classify images into different categories? Computer vision researchers have proposed a data-driven approach to solving this problem. Instead of trying to directly specify in the code what each image category of interest looks like, they provided the computer with many examples of each image category and then developed learning algorithms to view these examples and learn the visual appearance of each category. In other words, they first gathered a training set of labeled images, and then fed it into the computer to familiarize them with the data.</p>
+
+<h4 id="neural-network">Neural Network</h4>
+
+<p>Neural network is a machine learning algorithm, which is built on the organization and functional principles of biological neural networks. This concept emerged to simulate the processes occurring in the brain by Warren McCulloch and Walter Pitts in 1943. Neural networks consist of single units called neurons. Neurons are located in a series of groups — layers (see figure below). Neurons in each layer are connected to the neurons in the next layer. Data are transferred from the input layer to the output layer along with these compounds. Each individual node performs simple mathematical calculations and transmits its input data to all nodes connected to it.</p>
+
+<p><figure><img src="https://i.postimg.cc/pXDpbs4J/Wechat-IMG1807.png" alt="NN"></figure></p>
+
+<p>The last wave of neural networks came in connection with the improvement of computing power and the accumulation of experience. This brought about <strong>Deep Learning</strong>, in which the technical structure of neural networks becomes more complex and able to solve a wide range of tasks that could not be effectively solved before. Image classification is a prominent example. The complete image classification pipeline can be formalized as follows:</p>
+
+<ul>
+<li>The input is a training set containing N images, each image is labeled with one of K different categories.</li>
+<li>Then, we use this training set to train a classifier to learn the appearance of each category.</li>
+<li>After that, we evaluate the performance of the classifier by asking it to predict the labels for a new set of images that it has never seen before. Then, we compare the true labels of these images with the labels predicted by the classifier.</li>
+</ul>
+
+<h4 id="convolutional-neural-network">Convolutional Neural Network</h4>
+
+<p>Convolutional Neural Network (CNN) is the most popular neural network model for image classification problems. The main task of image classification is to accept an input image and provide its label. This is a skill that people learn from birth and can easily determine the image in the picture. However, the computer sees the pixel array instead of the image. In order to solve this problem, the computer will look for basic-level features. Then, through the convolutional layer group, the computer constructs more abstract concepts. Specifically, the input image goes through a series of convolution, non-linear, pooling, and fully connected layers, and then the output is generated.</p>
+
+<h2 id="example-in-insects-classification">Example in Insects Classification</h2>
+
+<p>In this article, I will train a CNN model to classify three types of insects (beetles, cockroaches and dragonglies). In this case, both the training set and test set are images of these three insects.</p>
+
+<h4 id="download-the-insects-dataset">Download the insects dataset</h4>
+
+<p>The training set contains 1,019 color images in 3 categories, and each category contains 460, 240, and 319 images. The test dataset contains 180 color images, with 60 images in each category. These classes are mutually exclusive and there is no overlap between them.</p>
+
+<p><strong>Note: I convert all images to the same size (84,84,3) since the input size should be the same for CNN model.</strong></p>
+<pre><code>def read_directory(directory_name, transform = False, high = None, width = None):
+    &#39;&#39;&#39; 
+    Read all images in the directory. 
+    And resize them using zero padding to make them in the same shape.
+    &#39;&#39;&#39;
+    
+    array_of_img = []
+    for filename in os.listdir(r&#39;./&#39;+directory_name):
+        img = cv2.imread(directory_name + &#39;/&#39; + filename)
+        if img is not None:
+            img = cv2.resize(img, dsize=(84, 84), interpolation=cv2.INTER_CUBIC)
+            array_of_img.append(img)
+    return array_of_img
+
+def see_image(img):
+    &#39;&#39;&#39; For display convenience, change RGB to BGR.&#39;&#39;&#39;
+    return(img[:,:,::-1])</code></pre><pre><code>## read data and resize to (84, 84, 3)
+categories = [&#39;beetles&#39;, &#39;cockroach&#39;, &#39;dragonflies&#39;]
+X_train = []
+y_train = []
+X_test = []
+y_test = []
+
+for category in categories:
+    x = read_directory(r&#39;insects/train/&#39; + category)
+    y = np.repeat(category, len(x))
+    X_train += list(x)
+    y_train += list(y)
+    
+    xx = read_directory(r&#39;insects/test/&#39; + category)
+    #xx = xx[:len(xx)-1]  ## the last one is &#39;None&#39;
+    yy = np.repeat(category, len(xx))
+    X_test += list(xx)
+    y_test += list(yy)</code></pre>
+<p>Let's see a sample of data from the training set.</p>
+<pre><code>## show samples from the training set
+f, axarr = plt.subplots(3,3, figsize = (12,12)) 
+ids = np.random.randint(0, len(X_train), 9)
+
+for i in range(len(ids)):
+    axarr[i // 3, i % 3].imshow(see_image(X_train[ids[i]]))
+    axarr[i // 3, i % 3].set_title(y_train[ids[i]])
+    axarr[i // 3, i % 3].axis(&#39;off&#39;)
+pass</code></pre>
+<p><figure><img src="https://i.postimg.cc/wT1qk0ck/Unknown.png" alt="sample in training set"></figure></p>
+
+<p><strong>Even the images have been resized, it does not seem to affect the classification.</strong></p>
+
+<h4 id="data-preprocessing">Data Preprocessing</h4>
+
+<p>I first encode the labels of into numeric values. <strong>LabelEncoder</strong> encode labels with a value between 0 and K_classes-1 where K is the number of distinct labels. To save memory and space, I generated many batches of size 64 from the training set, which will be used in the backpropagation later.</p>
+<pre><code>batch_size = 64
+
+## encode labels
+le = LabelEncoder()
+le.fit(y_train)
+y_train = le.transform(y_train)
+y_test = le.transform(y_test)
+
+X_train_tensor = torch.Tensor(np.array(X_train) / 255) # transform to torch tensor
+y_train_tensor = torch.Tensor(y_train).long()
+X_test_tensor = torch.Tensor(np.array(X_test) / 255)
+y_test_tensor = torch.Tensor(y_test).long()
+
+train_dataset = torch.utils.data.TensorDataset(X_train_tensor, y_train_tensor) # create datset
+test_dataset = torch.utils.data.TensorDataset(X_test_tensor, y_test_tensor)
+
+# create data loader
+train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True) 
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=True)</code></pre>
+<h4 id="create-the-cnn-model">Create the CNN model</h4>
+
+<p>As input, a CNN takes tensors of shape (image_height, image_width, color_channels), ignoring the batch size. If you are new to these dimensions, color_channels refers to (R,G,B). In this example, I configure our CNN to process inputs of shape (84, 84, 3). The model architecture (see figure below) is made on the principle of convolutional neural networks. It consists of 3 groups of layers, where the convolution layers (Conv 2D) alternate with the nonlinear layers (Relu) and the pooling layers (Max Pooling 2D). It then follows 2 tightly bound layers (Dense).</p>
+
+<p><figure><img src="https://i.postimg.cc/KYj1VVVp/cnn.png" alt="cnn"></figure></p>
+<pre><code>class CNN(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super(CNN, self).__init__()
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=16, kernel_size=5, stride=2, padding=1, bias=True)
+        self.conv2 = nn.Conv2d(in_channels=16, out_channels=64, kernel_size=3, stride=1, padding=0, bias=True)
+        self.fc1   = nn.Linear(in_features=64 * 9 * 9, out_features=256) 
+        self.fc2   = nn.Linear(in_features=256, out_features=84)
+        self.fc3   = nn.Linear(in_features=84, out_features=out_channels)
+
+    def forward(self, x):
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, 2)
+        x = F.relu(self.conv2(x))
+        x = F.max_pool2d(x, 2)
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x</code></pre>
+<h4 id="train-the-model">Train the model</h4>
+
+<p>When the preparation is complete, the code fragment of the training follows:</p>
+<pre><code>def train(model, device, train_loader, criterion, optimizer, epoch):
+    train_loss = 0
+    correct = 0
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        data, target = data.to(device), target.to(device)
+        data = Variable(data.reshape(-1, 3, 84, 84))
+        #print(data.shape)
+        target = Variable(target)
+        optimizer.zero_grad()
+        output = model(data)
+        loss = criterion(output, target)
+        loss.backward()
+        optimizer.step()
+        train_loss += loss.item()  # sum up batch loss
+        pred = output.argmax(dim=1, keepdim=True) # get the index of the max log-probability
+        correct += pred.eq(target.view_as(pred)).sum().item()
+        if batch_idx == len(train_loader)-1:
+            print(&#39;Epoch {}, Training Loss: {:.4f}&#39;.format(epoch, train_loss/(batch_idx+1)))
+    acc = correct / len(train_loader.dataset)
+    return(acc)
+            
+            
+def test(model, device, test_loader, criterion, epoch):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            data = Variable(data.reshape(-1, 3, 84, 84))
+            target = Variable(target)
+            output = model(data)
+            test_loss += criterion(output, target).item()
+            pred = output.argmax(dim=1, keepdim=True)
+            correct += pred.eq(target.view_as(pred)).sum().item()
+    acc = correct / len(test_loader.dataset)
+    #test_loss = (test_loss*batch_size)/len(test_loader.dataset)
+    print(&#39;Test{}: Accuracy: {:.4f}%&#39;.format(epoch, 100. * acc))
+    return(acc)</code></pre><pre><code>device = &#39;cuda&#39;
+device = torch.device(device)
+num_epochs = 30
+in_channels = 3
+out_channels = 3
+model = CNN(in_channels, out_channels).to(device)
+criterion = nn.CrossEntropyLoss()
+#optimizer = optim.SGD(model.parameters(),lr=0.001,momentum=0.9)
+optimizer = optim.Adam(model.parameters(),lr=0.001)
+
+train_acc = []
+test_acc = []
+for epoch in range(1, num_epochs + 1):
+    train_acc.append(train(model, device, train_loader, criterion, optimizer, epoch))
+    test_acc.append(test(model, device, test_loader, criterion, epoch))</code></pre>
+<h4 id="results">Results</h4>
+
+<p>The graph below shows the intersection of training accuracy and test accuracy. Test accuracy sows the ability of the model to generalize to new data. Test dataset contains only the data that the model never sees during the training and therefor cannot just memorize. If your training data accuracy keeps improving while your test data accuracy gets worse, you are likely in an overfitting situation, i.e. your model starts to basically just memorize the data. It can be seen that after 30 epochs the test accuracy is nearly 100%, it shows the ability of the model to generalize to new data.</p>
+<pre><code>plt.figure(figsize=(12,4))
+plt.plot(list(range(len(train_acc))), train_acc, color=&#39;blue&#39;, label=&#39;training accuracy&#39;)
+plt.plot(list(range(len(test_acc))), test_acc, color=&#39;darkorange&#39;, label=&#39;test accuracy&#39;)
+plt.legend(loc=&#39;upper left&#39;, bbox_to_anchor=(1.02, 1), borderaxespad=0)
+plt.xlabel(&#39;iterations&#39;)
+plt.ylabel(&#39;classification accuracy&#39;)
+plt.grid()
+plt.xlim(0, len(train_acc))
+plt.xticks(list(range(0, len(train_acc), 2)),list(range(1, len(train_acc)+1, 2)), fontsize=14);
+plt.show()</code></pre>
+<p><figure><img src="https://i.postimg.cc/zGVyVTfy/Unknown.png" alt="accuracy"></figure></p>
+
+<p>Let's see a sample of data from the test set with the true labels and the predictions.</p>
+<pre><code>## show samples from the test set
+f, axarr = plt.subplots(3,3, figsize = (12,12)) 
+data, label = next(iter(test_loader))
+data = data[:9].to(device)
+data = Variable(data.reshape(-1, 3, 84, 84))
+output = model(data)
+pred = output.argmax(dim=1, keepdim=True)
+data = data.detach()
+label = label.detach()
+pred = pred.detach()
+label = le.inverse_transform(label.cpu().numpy().ravel())
+pred = le.inverse_transform(pred.cpu().numpy().ravel())
+
+for i in range(9):
+    axarr[i // 3, i % 3].imshow(see_image(data[i].cpu().numpy().reshape(84, 84, 3)))
+    axarr[i // 3, i % 3].set_title(f&#39;True:{label[i]} \n Prediction:{pred[i]}&#39;)
+    axarr[i // 3, i % 3].axis(&#39;off&#39;)
+pass</code></pre>
+<p><figure><img src="https://i.postimg.cc/Bvw9t1Xn/Unknown.png" alt="samples from test set"></figure></p>
+
+<p>The results look great!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this article, I assembled and trained a CNN model to classify images of three insects. I have tested and the model does work really well for a small number of insect images. I measured how the accuracy depends on the number of epochs in order to detect potential overfitting issues. I found that about 25 epochs are enough for a successful training of the model.</p>
+
+<p>My next step will be to try the model on a larger insect dataset and try to apply it to practical tasks. I would also like to try other neural network design to learn how to achieve higher efficiency and accuracy in various problems.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/dashboard/">Dashboard</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/data-visualization/">Data Visualization</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/" data-tooltip="Dashboard for Doctorates Awarded in the United States">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Linlin Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/dashboard-for-doctorates-awarded-in-the-united-states/" data-tooltip="Dashboard for Doctorates Awarded in the United States">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Linlin Li</h4>
+    
+      <div id="about-card-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</div>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Durham, NC
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://i.postimg.cc/xCkJPyMv/blue.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://linlin-li-1.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

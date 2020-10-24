@@ -6,10 +6,19 @@
     <description>Recent content on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Oct 2020 17:23:49 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2020 04:17:45 -0400</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Image Classification using CNN</title>
+      <link>https://linlin-li-1.github.io/2020/10/image-classification-using-cnn/</link>
+      <pubDate>Sat, 24 Oct 2020 04:17:45 -0400</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/10/image-classification-using-cnn/</guid>
+      <description>As we all know, insects are a major factor in the world&#39;s agricultural economy. Therefore, it is particularly important to prevent and control agricultural insects by using procedures such as dynamic surveys and real-time monitoring systems for insect population management. However, there are many insects in the farmland, and it takes a lot of time to be manually classified by insect experts. Since people without the knowledge of entomology cannot distinguish the types of insects, it is necessary to develop more rapid and effective methods to solve this problem.</description>
+    </item>
     
     <item>
       <title>Dashboard for Doctorates Awarded in the United States</title>
