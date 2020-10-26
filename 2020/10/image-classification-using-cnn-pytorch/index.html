@@ -289,14 +289,17 @@
 <p>The training set contains 1,019 color images in 3 categories, and each category contains 460, 240, and 319 images. The test dataset contains 180 color images, with 60 images in each category. These classes are mutually exclusive and there is no overlap between them.</p>
 
 <p><strong>Note: I convert all images to the same size (84,84,3) since the input size should be the same for CNN model.</strong></p>
-<pre><code>def read_directory(directory_name, transform = False, high = None, width = None):
+<pre><code>def read_directory(directory_name, remove_directory = None):
     &#39;&#39;&#39; 
     Read all images in the directory. 
     And resize them using zero padding to make them in the same shape.
+    Since some images appear in both the training set and the test set, I need to remove them from the training set.
     &#39;&#39;&#39;
     
     array_of_img = []
     for filename in os.listdir(r&#39;./&#39;+directory_name):
+        if remove_directory is not None and filename in os.listdir(r&#39;./&#39;+remove_directory):
+            continue
         img = cv2.imread(directory_name + &#39;/&#39; + filename)
         if img is not None:
             img = cv2.resize(img, dsize=(84, 84), interpolation=cv2.INTER_CUBIC)
@@ -312,17 +315,18 @@ y_train = []
 X_test = []
 y_test = []
 
-for category in categories:
-    x = read_directory(r&#39;insects/train/&#39; + category)
-    y = np.repeat(category, len(x))
-    X_train += list(x)
-    y_train += list(y)
-    
+for category in categories:    
     xx = read_directory(r&#39;insects/test/&#39; + category)
     #xx = xx[:len(xx)-1]  ## the last one is &#39;None&#39;
     yy = np.repeat(category, len(xx))
     X_test += list(xx)
-    y_test += list(yy)</code></pre>
+    y_test += list(yy)
+    
+    x = read_directory(r&#39;insects/train/&#39; + category, r&#39;insects/test/&#39; + category)
+    y = np.repeat(category, len(x))
+    #print(len(y))
+    X_train += list(x)
+    y_train += list(y)</code></pre>
 <p>Let's see a sample of data from the training set.</p>
 <pre><code>## show samples from the training set
 f, axarr = plt.subplots(3,3, figsize = (12,12)) 
@@ -339,8 +343,8 @@ pass</code></pre>
 
 <h4 id="data-preprocessing">Data Preprocessing</h4>
 
-<p>I first encode the labels of into numeric values. <strong>LabelEncoder</strong> encode labels with a value between 0 and K_classes-1 where K is the number of distinct labels. To save memory and space, I generated many batches of size 64 from the training set, which will be used in the backpropagation later.</p>
-<pre><code>batch_size = 64
+<p>I first encode the labels of into numeric values. <strong>LabelEncoder</strong> encode labels with a value between 0 and K_classes-1 where K is the number of distinct labels. To save memory and space, I generated many batches of size 32 from the training set, which will be used in the backpropagation later.</p>
+<pre><code>batch_size = 32
 
 ## encode labels
 le = LabelEncoder()
@@ -367,7 +371,7 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch
 <pre><code>class CNN(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(CNN, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=16, kernel_size=5, stride=2, padding=1, bias=True)
+        self.conv1 = nn.Conv2d(in_channels=in_channels, out_channels=16, kernel_size=3, stride=2, padding=1, bias=True)
         self.conv2 = nn.Conv2d(in_channels=16, out_channels=64, kernel_size=3, stride=1, padding=0, bias=True)
         self.fc1   = nn.Linear(in_features=64 * 9 * 9, out_features=256) 
         self.fc2   = nn.Linear(in_features=256, out_features=84)
@@ -432,17 +436,21 @@ in_channels = 3
 out_channels = 3
 model = CNN(in_channels, out_channels).to(device)
 criterion = nn.CrossEntropyLoss()
-#optimizer = optim.SGD(model.parameters(),lr=0.001,momentum=0.9)
+#optimizer = optim.SGD(model.parameters(),lr=0.01,momentum=0.9)
 optimizer = optim.Adam(model.parameters(),lr=0.001)
 
 train_acc = []
 test_acc = []
 for epoch in range(1, num_epochs + 1):
     train_acc.append(train(model, device, train_loader, criterion, optimizer, epoch))
-    test_acc.append(test(model, device, test_loader, criterion, epoch))</code></pre>
+    acc = test(model, device, test_loader, criterion, epoch)
+    test_acc.append(acc)
+    if epoch == 1 or old &lt; acc:
+        torch.save(model.state_dict(), &#39;ckpt_cnn.pth&#39;)
+        old = acc</code></pre>
 <h4 id="results">Results</h4>
 
-<p>The graph below shows the intersection of training accuracy and test accuracy. Test accuracy sows the ability of the model to generalize to new data. Test dataset contains only the data that the model never sees during the training and therefor cannot just memorize. If your training data accuracy keeps improving while your test data accuracy gets worse, you are likely in an overfitting situation, i.e. your model starts to basically just memorize the data. It can be seen that after 30 epochs the test accuracy is nearly 100%, it shows the ability of the model to generalize to new data.</p>
+<p>The graph below shows the intersection of training accuracy and test accuracy. Test accuracy sows the ability of the model to generalize to new data. Test dataset contains only the data that the model never sees during the training and therefor cannot just memorize. If your training data accuracy keeps improving while your test data accuracy gets worse, you are likely in an overfitting situation, i.e. your model starts to basically just memorize the data. It can be seen that after 15 epochs the test accuracy is over 80%, it shows the ability of the model to generalize to new data.</p>
 <pre><code>plt.figure(figsize=(12,4))
 plt.plot(list(range(len(train_acc))), train_acc, color=&#39;blue&#39;, label=&#39;training accuracy&#39;)
 plt.plot(list(range(len(test_acc))), test_acc, color=&#39;darkorange&#39;, label=&#39;test accuracy&#39;)
@@ -453,10 +461,13 @@ plt.grid()
 plt.xlim(0, len(train_acc))
 plt.xticks(list(range(0, len(train_acc), 2)),list(range(1, len(train_acc)+1, 2)), fontsize=14);
 plt.show()</code></pre>
-<p><figure><img src="https://i.postimg.cc/zGVyVTfy/Unknown.png" alt="accuracy"></figure></p>
+<p><figure><img src="https://i.postimg.cc/8zGGK66s/Unknown.png" alt="accuracy"></figure></p>
 
 <p>Let's see a sample of data from the test set with the true labels and the predictions.</p>
-<pre><code>## show samples from the test set
+<pre><code>model = CNN(in_channels, out_channels).to(device)
+model.load_state_dict(torch.load(&#39;ckpt_cnn.pth&#39;))
+
+## show samples from the test set
 f, axarr = plt.subplots(3,3, figsize = (12,12)) 
 data, label = next(iter(test_loader))
 data = data[:9].to(device)
@@ -474,13 +485,13 @@ for i in range(9):
     axarr[i // 3, i % 3].set_title(f&#39;True:{label[i]} \n Prediction:{pred[i]}&#39;)
     axarr[i // 3, i % 3].axis(&#39;off&#39;)
 pass</code></pre>
-<p><figure><img src="https://i.postimg.cc/Bvw9t1Xn/Unknown.png" alt="samples from test set"></figure></p>
+<p><figure><img src="https://i.postimg.cc/cCtkZXVZ/Unknown1.png" alt="samples from test set"></figure></p>
 
-<p>The results look great!</p>
+<p>The model makes mistakes on the second and the sixth images. For the second one, it is easy for humans to determine it is a cockroach. However, for the sixth one, even for humans, it is difficult to distinguish.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>In this article, I assembled and trained a CNN model to classify images of three insects. I have tested and the model does work really well for a small number of insect images. I measured how the accuracy depends on the number of epochs in order to detect potential overfitting issues. I found that about 25 epochs are enough for a successful training of the model.</p>
+<p>In this article, I assembled and trained a CNN model to classify images of three insects. I have tested and the model does work okay (~80%) for a small number of insect images. I measured how the accuracy depends on the number of epochs in order to detect potential overfitting issues. I found that about 15 epochs are enough for a successful training of the model.</p>
 
 <p>My next step will be to try the model on a larger insect dataset and try to apply it to practical tasks. I would also like to try other neural network design to learn how to achieve higher efficiency and accuracy in various problems.</p>
 
