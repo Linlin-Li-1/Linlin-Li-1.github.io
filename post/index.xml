@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Linlin Li&#39;s Data Science Project Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Oct 2020 04:17:45 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2020 17:20:39 -0500</lastBuildDate>
     
 	<atom:link href="https://linlin-li-1.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>COVID-19 Analysis</title>
+      <link>https://linlin-li-1.github.io/2020/11/covid-19-analysis/</link>
+      <pubDate>Tue, 17 Nov 2020 17:20:39 -0500</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/11/covid-19-analysis/</guid>
+      <description>1. Background COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people&#39;s attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &amp;quot;experts&amp;quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system.</description>
+    </item>
     
     <item>
       <title>Image Classification using CNN (PyTorch)</title>

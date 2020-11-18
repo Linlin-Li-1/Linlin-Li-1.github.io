@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Linlin Li">
+<meta name="keywords" content="Python, Plotly">
+<meta name="description" content="1. Background COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people&#39;s attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &quot;experts&quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system.">
+
+
+<meta property="og:description" content="1. Background COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people&#39;s attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &quot;experts&quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COVID-19 Analysis">
+<meta name="twitter:title" content="COVID-19 Analysis">
+<meta property="og:url" content="https://linlin-li-1.github.io/2020/11/covid-19-analysis/">
+<meta property="twitter:url" content="https://linlin-li-1.github.io/2020/11/covid-19-analysis/">
+<meta property="og:site_name" content="Linlin Li&#39;s Data Science Project Portfolio">
+<meta property="og:description" content="1. Background COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people&#39;s attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &quot;experts&quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system.">
+<meta name="twitter:description" content="1. Background COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people&#39;s attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &quot;experts&quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system.">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2020-11-17T17:20:39">
+  
+  
+    <meta property="article:modified_time" content="2020-11-17T17:20:39">
+  
+  
+  
+    
+      <meta property="article:section" content="Blog">
+    
+  
+  
+    
+      <meta property="article:tag" content="Python">
+    
+      <meta property="article:tag" content="Dashboard">
+    
+      <meta property="article:tag" content="Data Visualization">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://i.postimg.cc/zG1xmGPV/Coronavirus-CDC-645x645.jpg">
+  <meta property="twitter:image" content="https://i.postimg.cc/zG1xmGPV/Coronavirus-CDC-645x645.jpg">
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=640">
+
+
+    <title>COVID-19 Analysis</title>
+
+    <link rel="icon" href="https://linlin-li-1.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://linlin-li-1.github.io/2020/11/covid-19-analysis/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://linlin-li-1.github.io/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://linlin-li-1.github.io/">Linlin Li&#39;s Data Science Project Portfolio</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://linlin-li-1.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://linlin-li-1.github.io/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Linlin Li</h4>
+        
+          <h5 class="sidebar-profile-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://linlin-li-1.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="mailto:linlin.li434@duke.edu" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-envelope"></i>
+      
+      <span class="sidebar-button-desc">Email</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/Linlin-Li-1" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/linlin-li/" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      COVID-19 Analysis
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-11-17T17:20:39-05:00">
+        
+  November 17, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://linlin-li-1.github.io/categories/blog">Blog</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><figure><img src="https://i.postimg.cc/bJg6g9w8/Picture1.png" alt="Food&amp;COVID-19"></figure></p>
+
+<h2 id="1-background">1. Background</h2>
+
+<p>COVID-19, a disease caused by a new type of coronavirus, has become a major global human threat that has turned into a pandemic. During this period, the role of the immune system has attracted people's attention. Some researchers identified some important nutritional considerations for the prevention and management of COVID-19 diseases (Yasemin Ipek Ayseli et al., 2020). Based on these studies, some &quot;experts&quot; and articles have urged people to buy supplements or eat particular foods to enhance their immune system. However, as highlighted by the World Health Organization, a healthy lifestyle makes all bodily functions work better, including immunity (World Health Organization, 2020). Having a healthy diet, including lots of fruits and vegetables, is a key component of an effective immune system to help protect against infection and other diseases (World Health Organization, 2020), which indicates that people may not need to eat such supplements. Therefore, facing these two completely different claims, people, including us, have a big question: Can these supplements and food really strengthen people's immune systems? Is it necessary for people to eat these supplements or particular foods?</p>
+
+<p>In this post, I will share my final project for Biostatistics 823: Statistical Programming for Big Data, a course I took in the fall semester at Duke University. In this project, my teammates and I provided some exploratory analysis about COVID-19. Then, we tried to build machine learning models to examine the relationship between the recovery rate of COVID-19 and food. Finally, we evaluated the performance of the models and provided insights from the results.</p>
+
+<h2 id="2-objective">2. Objective</h2>
+
+<p>In the past few months, we have witnessed doctors, nurses, and thousands of medical staff putting their lives on the front line to save infected patients. As the battle against COVID-19 continues, we should all ask ourselves what should we do to help? What can we do to protect our loved ones, those who sacrificed for us, and ourselves from this pandemic? One possible way to protect the health of our family and ourselves is to adapt to healthy eating habits.</p>
+
+<p>The Center for Nutrition Policy and Promotion (CNPP) recommends a very simple daily dietary intake: 30% grains, 40% vegetables, 10% fruits, and 20% protein, but do we really follow the recommendations of these food to eat a healthy diet? Do we need to adjust our eating habits based on the diet patterns of countries with a low COVID-19 infection rate?</p>
+
+<p>In China, some doctors recommend that people eat more eggs and drink more milk to improve their immunity. We would like to use statistical analysis to study the relationship between eggs and other foods and the infection rate and fatality rate of COVID-19, and analyze whether these suggestions may be effective. The results will be beneficial to all people who suffer from this pandemic and hope to protect themselves.</p>
+
+<h2 id="3-datasets">3. Datasets</h2>
+
+<h3 id="31-covid19-datasets">3.1 COVID-19 Datasets</h3>
+
+<p>The dataset we used is from Amazon Web Services (AWS) data lake for analysis of COVID-19 data (<a href="https://dj2taa9i652rf.cloudfront.net/">https://dj2taa9i652rf.cloudfront.net/</a>). This database is a centralized repository of up-to-date and curated datasets on or related to the spread and characteristics of SARS-CoV-2 and COVID-19.</p>
+
+<h3 id="32-food-datasets">3.2 Food Datasets</h3>
+
+<p>The diet information and COVID-19 recovery rate data are from Kaggle. The link to the dataset is <a href="https://www.kaggle.com/mariaren/covid19-healthy-diet-dataset?select=Fat_Supply_Quantity_Data.csv">https://www.kaggle.com/mariaren/covid19-healthy-diet-dataset?select=Fat_Supply_Quantity_Data.csv</a>.</p>
+
+<h3 id="33-economic-datasets">3.3 Economic Datasets</h3>
+
+<p>To analyzing the economic impacts of COVID-19, we used the GDP growth rate and population data of G20 countries from Organisation for Economic Co-operation and Development (OECD).</p>
+
+<h2 id="4-food-and-covid19">4. Food and COVID-19</h2>
+
+<h3 id="41-data-visualization">4.1 Data Visualization</h3>
+
+<p>Next, we will study the relationship between the recovery rate of COVID-19 and food. For example, Figure below shows the relationship between animal fats and COVID-19 recovery rate in different regions.</p>
+
+<p><figure><img src="https://i.postimg.cc/RV1DZttc/animal-fat.png" alt="Animal fats and COVID-19"></figure>
+From this graph, I realize that:</p>
+
+<ul>
+<li>People in Africa have the lowest average animal fats intake around the world and a really low recovery rate of COVID-19.</li>
+<li>People in Asia and Pacific as well as Arab States have a moderately low animal fats intake and a moderately low recovery rate.</li>
+<li>People in Europe have a more diverse eating habits and the recovery rate also varies a lot.</li>
+<li>People in Middle East and South/Latin America have a moderately low animal fats intake, but the recovery rate has a pretty wide range.</li>
+<li>People in North America has the highest animal fats intake with a moderate recovery rate.</li>
+</ul>
+
+<h3 id="42-modeling">4.2 Modeling</h3>
+
+<p>In order to study the relationship between COVID-19 recovery rate and food, we tried several machine learning models. Before discussing models, I would like to explain why we choose the recovery rate, instead of the positive rate or the death rate. Since we realized that the positive rate, or the transmission rate, is much more relevant to masks and social distance, these two factors are much more important for transmission than food. However, since food is often associated with nutrition, and nutrition may have a certain relationship with the immune system, we speculate that food may have a relationship with the immune system, so food can be related to the recovery rate of COVID-19.</p>
+
+<p>In terms of modeling, we tried several models, including random forest regression, elastic net regression, and gradient boosting regression. Among all models we tried, gradient boosting regression is the best one.
+<p align="center">
+  <img src="https://i.postimg.cc/vHv0ssRh/ml.png" width="300" height="300" /></p>
+
+<p>After the hyperparameter selection, the test loss is about 0.05.
+<p align="center">
+<img src="https://i.postimg.cc/s23y2y12/Screen-Shot-2020-11-15-at-9-15-59-PM.png" width="450" height="450" />
+</p></p>
+
+<p align="center">
+<img src="https://i.postimg.cc/ZRdh7qMV/Screen-Shot-2020-11-16-at-1-19-44-PM.png" width="450" height="450" />
+</p>
+
+<p>From the above graphs, we can see that vegetables is the most important features among various types of food. And pulses, animal fats, meat are also important for recovering from COVID-19.</p>
+
+<p>Besides, we would like to analyze the economic impacts of COVID-19.</p>
+
+<h2 id="5-economic-impacts-of-covid">5. Economic Impacts of COVID</h2>
+
+<p>It is a common belief that the speed and severity of disease transmission in a country are often related to its economic status. Figures below (The first graph shows the economic impacts in the first quarter of 2020 on G20 countries, and the second graph shows the economic impacts in the second quarter of 2020. ) displays the relationship between COVID-19 and economy.</p>
+
+<p align="center">
+<img src="https://i.postimg.cc/FzVXvLpH/economic.png" width="450" height="450" />
+</p>
+
+<p align="center">
+<img src="https://i.postimg.cc/kMF0BWNn/economic2.png" width="450" height="450" />
+</p>
+
+<p>From these graphs, we found that:</p>
+
+<ul>
+<li>In the first quarter of 2020, more than half of the countries/regions were affected by COVID-19, of which China suffered the most economic impact, while the United States suffered only economic stagnation.</li>
+<li>In the second quarter of 2020, most of the G20 countries suffered a severe economic blow due to COVID-19, and China is the only country that has recovered its economy.</li>
+</ul>
+
+<h2 id="6-conclusion">6. Conclusion</h2>
+
+<p>Based on our analysis, vegetables, pulses, animal fats, meat are important food for recovering from COVID-19. However, this does not mean that patients need to absorb a lot of these foods. It is still necessary to maintain a balanced and healthy diet. Our research only shows that these foods may have some nutrients that can strengthen the immune system. Excessive consumption of a particular food is always detrimental to health.</p>
+
+<p>As the battle against COVID-19 continues, we should all be committed to maintaining the physical and mental health of ourselves and our family, wearing masks, maintaining social distance, and believing that we can get through the hard time.</p>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/python/">Python</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/dashboard/">Dashboard</a>
+
+  <a class="tag tag--primary tag--small" href="https://linlin-li-1.github.io/tags/data-visualization/">Data Visualization</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/image-classification-using-cnn-pytorch/" data-tooltip="Image Classification using CNN (PyTorch)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Linlin Li. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://linlin-li-1.github.io/2020/10/image-classification-using-cnn-pytorch/" data-tooltip="Image Classification using CNN (PyTorch)">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/1b1a0de53499fb41484c23d568bdbaea?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Linlin Li</h4>
+    
+      <div id="about-card-bio">Student in the Master’s of Statistical Science program at <strong>Duke</strong> | Looking for full-time opportunity as Data Scientist, Machine Learning Engineer, Data Analyst</div>
+    
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Durham, NC
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://i.postimg.cc/xCkJPyMv/blue.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://linlin-li-1.github.io/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
