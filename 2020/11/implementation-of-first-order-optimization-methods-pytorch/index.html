@@ -278,7 +278,7 @@ class optimizer: def __init__(self): pass def set_param(self, parameters): self.
 <h2 id="1-stochastic-gradient-descent">1. (Stochastic) Gradient Descent</h2>
 
 <p align="center">
-  <img src="https://i.postimg.cc/T2KG7fsz/sgd.png" width="400" height="200" />
+  <img src="https://i.postimg.cc/T2KG7fsz/sgd.png" width="400" height="250" />
 </p>
 
 <p>Note that underlying i.i.d. assumption, <span  class="math">\(\mathbb{E}_{p(i_k)} [\nabla f_{i_k} (\mathbf{w}_k)] = \frac{1}{N} \sum^N_{i=1} \nabla f_{i} (\mathbf{w}_k)\)</span> . This means that <span  class="math">\(\frac{1}{N} \sum^N_{i=1} \nabla f_{i} (\mathbf{w}_k)\)</span> is an unbiased estimator of <span  class="math">\(\mathbb{E}_{p(i_k)} [\nabla f_{i_k} (\mathbf{w}_k)]\)</span>.</p>
@@ -330,7 +330,7 @@ class optimizer: def __init__(self): pass def set_param(self, parameters): self.
 
 <p>Classically, momentum &quot;dampens&quot; the highly oscillatory terms.
 <p align="center">
-  <img src="https://i.postimg.cc/VLsBMskC/momentum.png" width="300" height="300" />
+  <img src="https://i.postimg.cc/VLsBMskC/momentum.png" width="400" height="200" />
 </p></p>
 <pre><code>class SGD_Momentum(optimizer):
     def __init__(self, lr, beta):
@@ -351,7 +351,7 @@ class optimizer: def __init__(self): pass def set_param(self, parameters): self.
 <p>In addition to the gradient information from the previous iteration, gradients from other iteration(s) are contributed with appropriate weights to the calculation of the current estimate of the parameter.</p>
 
 <p align="center">
-  <img src="https://i.postimg.cc/J7pKpHgq/NAG.png" width="300" height="300" />
+  <img src="https://i.postimg.cc/J7pKpHgq/NAG.png" width="500" height="400" />
 </p>
 <pre><code>class SGD_NAG(optimizer):
     def __init__(self, lr, beta):
@@ -376,7 +376,7 @@ class optimizer: def __init__(self): pass def set_param(self, parameters): self.
 <p>The key idea is that sparsely occurring features may be very informative - only decrease step size when information relating to that parameter is seen. This is provably improves regret bounds compared to online (stochastic) gradient descent.</p>
 
 <p align="center">
-  <img src="https://i.postimg.cc/wvZcLZ0s/rms.png" width="300" height="300" />
+  <img src="https://i.postimg.cc/wvZcLZ0s/rms.png" width="500" height="230" />
 </p>
 
 <p>RMSprop algorithm will converge if <span  class="math">\(\alpha \rightarrow 0\)</span> with at rate <span  class="math">\(t^{1/2}\)</span>. The typical step size to use is <span  class="math">\(\alpha \cong 10^{-3}\)</span>.</p>
@@ -411,7 +411,7 @@ class SGD_RMSprop(optimizer):
 \alpha = 10^{-3}, ~\beta_1 = 0.9, ~\beta_2 = 0.999. Note that \)</span>\beta_1<span  class="math">\( going higher will reduce the variance of gradients, but can add bias. 
 \)</span>
 <p align="center">
-  <img src="https://i.postimg.cc/kDrs3zSd/adam.png" width="300" height="300" />
+  <img src="https://i.postimg.cc/kDrs3zSd/adam.png" width="400" height="320" />
 </p></p>
 <pre><code>class SGD_Adam(optimizer):
     def __init__(self, lr, betas, eps):
@@ -437,11 +437,11 @@ class SGD_RMSprop(optimizer):
 <h2 id="6--comparison">6.  Comparison</h2>
 
 <p align="center">
-  <img src="https://i.postimg.cc/Nj2yrFZb/compare0.png" width="300" height="300" />
+  <img src="https://i.postimg.cc/Nj2yrFZb/compare0.png" width="400" height="400" />
 </p>
 
 <p align="center">
-  <img src="https://i.postimg.cc/T3KbqC5V/compare.png" width="400" height="400" />
+  <img src="https://i.postimg.cc/T3KbqC5V/compare.png" width="450" height="450" />
 </p>
 
 <ul>
