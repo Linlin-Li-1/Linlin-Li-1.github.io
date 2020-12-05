@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PyTorch on Linlin Li&#39;s Data Science Project Portfolio</title>
+    <link>https://linlin-li-1.github.io/tags/pytorch/</link>
+    <description>Recent content in PyTorch on Linlin Li&#39;s Data Science Project Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Nov 2020 22:40:39 -0500</lastBuildDate>
+    
+	<atom:link href="https://linlin-li-1.github.io/tags/pytorch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Two-stage 3D CNN-based Object Classification</title>
+      <link>https://linlin-li-1.github.io/2020/11/two-stage-3d-cnn-based-object-classification/</link>
+      <pubDate>Sat, 28 Nov 2020 22:40:39 -0500</pubDate>
+      
+      <guid>https://linlin-li-1.github.io/2020/11/two-stage-3d-cnn-based-object-classification/</guid>
+      <description>In this post I’ll be discussing my final project for ECE 685: Deep Learning, a course I took at Duke University. For this project, Jiawei Chen and I proposed a two-stage algorithm to improve classification accuracy. You can find my Github repository for this blog here.
+Convolutional Neural Networks (CNNs) have been used on 3D point clouds for object classification. However, due to the nature of the CNNs, classifiers, especially those CNN-based classifiers, are usually confused about objects that look alike.</description>
+    </item>
+    
+  </channel>
+</rss>
